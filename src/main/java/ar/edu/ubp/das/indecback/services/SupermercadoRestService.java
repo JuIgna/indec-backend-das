@@ -8,11 +8,16 @@ import java.util.List;
 
 public class SupermercadoRestService implements SupermercadoService {
 
-    private final String baseUrl = "http://localhost:8085/api/v1/supermercado1";
-    private final String username = "rest123";  // Usuario de autenticación
-    private final String password = "rest123";  // Contraseña de autenticación
+    private  String baseUrl;
+    private  String username;  // Usuario de autenticación
+    private  String password;  // Contraseña de autenticación
 
 
+    public SupermercadoRestService(String baseUrl, String username, String password) {
+        this.baseUrl = baseUrl;
+        this.username = username;
+        this.password = password;
+    }
 
     @Override
     public List<SucursalBean> obtenerInformacionCompletaSucursales() {
@@ -47,6 +52,14 @@ public class SupermercadoRestService implements SupermercadoService {
         }.getType());
     }
 
+}
+
+
+
+
+// ESTOS SERVICIOS NO SON NECESARIOS PARA CONSUMIR, ELIMINAR
+    /*
+
     @Override
     public List<PaisBean> obtenerPaises (){
         Httpful client = new Httpful(baseUrl)
@@ -69,6 +82,7 @@ public class SupermercadoRestService implements SupermercadoService {
         }.getType());
     }
 
+
     @Override
     public List<LocalidadIndecBean> obtenerLocalidades (){
         Httpful client = new Httpful(baseUrl)
@@ -79,6 +93,8 @@ public class SupermercadoRestService implements SupermercadoService {
         return client.execute(new TypeToken<List<LocalidadIndecBean>>() {
         }.getType());
     }
+
+
 
     @Override
     public List<SupermercadoBean> obtenerSupermercados () {
@@ -92,7 +108,7 @@ public class SupermercadoRestService implements SupermercadoService {
 
     }
 
-}
+     */
 
 
 

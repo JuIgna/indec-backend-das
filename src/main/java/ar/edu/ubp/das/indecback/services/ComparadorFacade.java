@@ -18,9 +18,9 @@ public class ComparadorFacade {
     public void actualizarSucursales() {
         // Obtener la lista de supermercados desde la base de datos de INDEC
 
-        List<SupermercadoIndecBean> supermercados = indecRepository.obtenerSupermercados();
+        List<SupermercadoBean> supermercados = indecRepository.obtenerSupermercados();
 
-        for (SupermercadoIndecBean supermercado : supermercados) {
+        for (SupermercadoBean supermercado : supermercados) {
             SupermercadoService supermercadoService = supermercadoServiceFactory.getService(supermercado);
 
                 List<SucursalBean> sucursales = supermercadoService.obtenerInformacionCompletaSucursales();
@@ -52,9 +52,9 @@ public class ComparadorFacade {
 
     public void actualizarInformacionProductos (){
         // Obtener la lista de supermercados desde la base de datos de INDEC
-        List<SupermercadoIndecBean> supermercados = indecRepository.obtenerSupermercados();
+        List<SupermercadoBean> supermercados = indecRepository.obtenerSupermercados();
 
-        for (SupermercadoIndecBean supermercado : supermercados) {
+        for (SupermercadoBean supermercado : supermercados) {
             SupermercadoService supermercadoService = supermercadoServiceFactory.getService(supermercado);
 
                 List<ProductoCompletoBean> productos = supermercadoService.obtenerInformacionCompletaProductos();
@@ -72,9 +72,9 @@ public class ComparadorFacade {
 
     public void actualizarPreciosProductos() {
         // Obtener la lista de supermercados desde la base de datos de INDEC
-        List<SupermercadoIndecBean> supermercados = indecRepository.obtenerSupermercados();
+        List<SupermercadoBean> supermercados = indecRepository.obtenerSupermercados();
 
-        for (SupermercadoIndecBean supermercado : supermercados) {
+        for (SupermercadoBean supermercado : supermercados) {
             SupermercadoService supermercadoService = supermercadoServiceFactory.getService(supermercado);
 
                 List<PrecioProductoBean> precioProductos = supermercadoService.obtenerInformacionPrecioProductos();
@@ -90,10 +90,11 @@ public class ComparadorFacade {
 
     }
 
+    /*
     public void actualizarUbicaciones() {
-        List<SupermercadoIndecBean> supermercados = indecRepository.obtenerSupermercados();
+        List<SupermercadoBean> supermercados = indecRepository.obtenerSupermercados();
 
-        for (SupermercadoIndecBean supermercado : supermercados) {
+        for (SupermercadoBean supermercado : supermercados) {
             SupermercadoService supermercadoService = supermercadoServiceFactory.getService(supermercado);
 
                 // Obtener información separada de países, provincias y localidades
@@ -114,6 +115,8 @@ public class ComparadorFacade {
 
         }
     }
+
+     */
 
 
 

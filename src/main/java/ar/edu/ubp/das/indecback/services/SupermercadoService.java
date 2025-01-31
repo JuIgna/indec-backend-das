@@ -12,6 +12,9 @@ public interface SupermercadoService {
 
     List<PrecioProductoBean> obtenerInformacionPrecioProductos();
 
+}
+    // SERVICIOS NO NECESARIOS, ELIMINAR
+    /*
     List<PaisBean> obtenerPaises ();
 
     List<ProvinciaIndecBean> obtenerProvincias ();
@@ -19,4 +22,6 @@ public interface SupermercadoService {
     List<LocalidadIndecBean> obtenerLocalidades ();
 
     List<SupermercadoBean> obtenerSupermercados ();
-}
+
+     */
+
