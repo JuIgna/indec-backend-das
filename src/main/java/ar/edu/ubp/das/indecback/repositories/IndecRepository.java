@@ -36,8 +36,8 @@ public class IndecRepository {
 
 
     // Método para obtener supermercados de indec
-    public List<SupermercadoIndecBean> obtenerSupermercados() {
-        return jdbcCallFactory.executeQuery("obtener_supermercados", "dbo", "supermercados", SupermercadoIndecBean.class);
+    public List<SupermercadoBean> obtenerSupermercados() {
+        return jdbcCallFactory.executeQuery("obtener_supermercados", "dbo", "supermercados", SupermercadoBean.class);
     }
 
     // Método para obtener la información completa de los productos
@@ -204,7 +204,7 @@ public class IndecRepository {
         jdbcCallFactory.execute("actualizar_localidad", "dbo", params);
     }
 
-    public void actualizarSupermercados (SupermercadoIndecBean req){
+    public void actualizarSupermercados (SupermercadoBean req){
         SqlParameterSource params = new MapSqlParameterSource()
                 .addValue("cuit", req.getCuit())
                 .addValue("razon_social", req.getRazon_social())

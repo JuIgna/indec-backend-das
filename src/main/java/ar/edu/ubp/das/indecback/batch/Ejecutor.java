@@ -46,7 +46,7 @@ public class Ejecutor {
             System.err.println("Error en la actualizacion de los precios de productos: " + e.getMessage());
         }
     }
-
+/*
     public void ejecutarActualizacionUbicaciones (){
         try {
             comparadorFacade.actualizarUbicaciones();
@@ -55,6 +55,8 @@ public class Ejecutor {
             System.err.println("Error en la actualizacion de las ubicaciones: " + e.getMessage());
         }
     }
+
+ */
 
     // Método para mostrar el menú y ejecutar la opción seleccionada
     public void mostrarMenu() {
@@ -74,17 +76,14 @@ public class Ejecutor {
 
             switch (opcion) {
                 case 1:
-                    ejecutarActualizacionUbicaciones();
-                    break;
-                case 2:
                     ejecutarActualizacionSucursales();
                     break;
-                case 3:
+                case 2:
                     ejecutarActualizacionInformacionProductos();
                     break;
-                case 4:
+                case 3:
                     ejecutarActualizacionPreciosProductos();
-                case 5:
+                case 4:
                     System.out.println("Saliendo del programa...");
                     break;
                 default:
@@ -93,7 +92,7 @@ public class Ejecutor {
 
             System.out.println();  // Línea en blanco para mejor legibilidad
 
-        } while (opcion != 5);
+        } while (opcion != 4);
 
         scanner.close();
     }
@@ -114,7 +113,7 @@ public class Ejecutor {
 
     }
 
-
+/*
     public void ejecutarPruebaSucursalesSoap() {
         SupermercadoSoapService soapService = new SupermercadoSoapService();
         try {
@@ -148,15 +147,6 @@ public class Ejecutor {
         }
     }
 
-
+*/
 }
-
-
-
-
-
-/*
-
-
- */
 
