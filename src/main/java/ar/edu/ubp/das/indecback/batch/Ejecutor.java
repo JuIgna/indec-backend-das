@@ -46,17 +46,6 @@ public class Ejecutor {
             System.err.println("Error en la actualizacion de los precios de productos: " + e.getMessage());
         }
     }
-/*
-    public void ejecutarActualizacionUbicaciones (){
-        try {
-            comparadorFacade.actualizarUbicaciones();
-            System.out.println("/nActualización de ubicaciones exitoso.");
-        } catch (Exception e) {
-            System.err.println("Error en la actualizacion de las ubicaciones: " + e.getMessage());
-        }
-    }
-
- */
 
     // Método para mostrar el menú y ejecutar la opción seleccionada
     public void mostrarMenu() {
@@ -112,40 +101,5 @@ public class Ejecutor {
 
     }
 
-/*
-    public void ejecutarPruebaSucursalesSoap() {
-        SupermercadoSoapService soapService = new SupermercadoSoapService();
-        try {
-            List<SucursalBean> sucursales = soapService.obtenerInformacionCompletaSucursales();
-
-            sucursales.forEach(sucursal -> {
-                System.out.println("Sucursal: " + sucursal.getNom_sucursal());
-                System.out.println("Calle: " + sucursal.getCalle());
-                System.out.println("Teléfonos: " + sucursal.getTelefonos());
-                // Agrega más campos si es necesario.
-                System.out.println("---------------------------------");
-            });
-        } catch (Exception e) {
-            System.err.println("Error al obtener las sucursales SOAP: " + e.getMessage());
-        }
-    }
-
-    public void ejecutarPruebaSucursalesRest() {
-        SupermercadoRestService restService = new SupermercadoRestService();
-        try {
-            List<SucursalBean> sucursales = restService.obtenerInformacionCompletaSucursales();
-            sucursales.forEach(sucursal -> {
-                System.out.println("Sucursal: " + sucursal.getNom_sucursal());
-                System.out.println("Calle: " + sucursal.getCalle());
-                System.out.println("Teléfonos: " + sucursal.getTelefonos());
-                // Agrega más campos si es necesario.
-                System.out.println("---------------------------------");
-            });
-        } catch (Exception e) {
-            System.err.println("Error al obtener las sucursales REST: " + e.getMessage());
-        }
-    }
-
-*/
 }
 

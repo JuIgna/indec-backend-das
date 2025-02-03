@@ -11,15 +11,5 @@ public interface SupermercadoService {
     <T> List <T> invocarServicio (Class<T> tipoRespuesta, String nombreOperacion, String metodo);
 
 }
-    // SERVICIOS NO NECESARIOS, ELIMINAR
-    /*
-    List<PaisBean> obtenerPaises ();
 
-    List<ProvinciaIndecBean> obtenerProvincias ();
-
-    List<LocalidadIndecBean> obtenerLocalidades ();
-
-    List<SupermercadoBean> obtenerSupermercados ();
-
-     */
 

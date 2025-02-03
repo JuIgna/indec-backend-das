@@ -115,32 +115,4 @@ public class ComparadorFacade {
         }
     }
 
-    /*
-    public void actualizarUbicaciones() {
-        List<SupermercadoBean> supermercados = indecRepository.obtenerSupermercados();
-
-        for (SupermercadoBean supermercado : supermercados) {
-            SupermercadoService supermercadoService = supermercadoServiceFactory.getService(supermercado);
-
-                // Obtener información separada de países, provincias y localidades
-                List<PaisBean> paises = supermercadoService.obtenerPaises();
-                List<ProvinciaIndecBean> provincias = supermercadoService.obtenerProvincias();
-                List<LocalidadIndecBean> localidades = supermercadoService.obtenerLocalidades();
-
-                // Actualizar cada entidad en el orden correcto
-                for (PaisBean pais : paises) {
-                    indecRepository.actualizarPais(pais);
-                }
-                for (ProvinciaIndecBean provincia : provincias) {
-                    indecRepository.actualizarProvincia(provincia);
-                }
-                for (LocalidadIndecBean localidad : localidades) {
-                    indecRepository.actualizarLocalidad(localidad);
-                }
-
-        }
-    }
-
-     */
-
 }

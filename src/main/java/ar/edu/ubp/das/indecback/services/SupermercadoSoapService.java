@@ -55,71 +55,9 @@ public class SupermercadoSoapService implements SupermercadoService {
             return (List<T>) soapClient.callServiceForList(PrecioProductoBean.class, "ObtenerInformacionPreciosProductosResponse");
         }
 
-
-
         return null;
     }
-
-
-
 
 }
 
 
-        /*
-        this.soapClientPaises = new SOAPClient.SOAPClientBuilder()
-                .wsdlUrl("http://localhost:8080/services/supermercado.wsdl")
-                .namespace("http://services.supermercadows.das.ubp.edu.ar/")
-                .serviceName("SupermercadoWSPortService")
-                .portName("SupermercadoWSPortSoap11")
-                .operationName("ObtenerPaisesRequest")  // Operation para obtener países
-                .username("WS123")
-                .password("WS123")
-                .build();
-
-        this.soapClientProvincias = new SOAPClient.SOAPClientBuilder()
-                .wsdlUrl("http://localhost:8080/services/supermercado.wsdl")
-                .namespace("http://services.supermercadows.das.ubp.edu.ar/")
-                .serviceName("SupermercadoWSPortService")
-                .portName("SupermercadoWSPortSoap11")
-                .operationName("ObtenerProvinciasRequest")  // Operation para obtener provincias
-                .username("WS123")
-                .password("WS123")
-                .build();
-
-        this.soapClientLocalidades = new SOAPClient.SOAPClientBuilder()
-                .wsdlUrl("http://localhost:8080/services/supermercado.wsdl")
-                .namespace("http://services.supermercadows.das.ubp.edu.ar/")
-                .serviceName("SupermercadoWSPortService")
-                .portName("SupermercadoWSPortSoap11")
-                .operationName("ObtenerLocalidadesRequest")  // Operation para obtener localidades
-                .username("WS123")
-                .password("WS123")
-                .build();
-*/
-
-
-// SERVICIOS NO NECESARIOS, ELIMINAR
-
-    /*
-    @Override
-    public List<PaisBean> obtenerPaises() {
-        return soapClientPaises.callServiceForList(PaisBean.class, "ObtenerPaisesResponse");
-    }
-
-    @Override
-    public List<ProvinciaIndecBean> obtenerProvincias() {
-        return soapClientProvincias.callServiceForList(ProvinciaIndecBean.class, "ObtenerProvinciasResponse");
-    }
-
-    @Override
-    public List<LocalidadIndecBean> obtenerLocalidades() {
-        return soapClientLocalidades.callServiceForList(LocalidadIndecBean.class, "ObtenerLocalidadesResponse");
-    }
-
-
-    @Override
-    public List<SupermercadoBean> obtenerSupermercados() {
-        return List.of();
-    }
-    */
