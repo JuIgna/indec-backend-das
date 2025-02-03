@@ -65,11 +65,10 @@ public class Ejecutor {
 
         do {
             System.out.println("/nSeleccione la acción que desea ejecutar:");
-            System.out.println("1. Actualizar Paises, Provincias y Localidades");
-            System.out.println("2. Actualizar Sucursales");
-            System.out.println("3. Actualizar Información de Productos");
-            System.out.println("4. Actualizar Precios de Productos");
-            System.out.println("5. Salir");
+            System.out.println("1. Actualizar Sucursales");
+            System.out.println("2. Actualizar Productos");
+            System.out.println("3. Actualizar Precios de Productos");
+            System.out.println("4. Salir");
 
             System.out.print("Ingrese su opción: ");
             opcion = scanner.nextInt();

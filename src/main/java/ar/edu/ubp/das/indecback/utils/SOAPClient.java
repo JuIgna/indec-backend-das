@@ -191,8 +191,8 @@ public class SOAPClient {
         try {
             soapResponse = dispatch.invoke(soapRequest);
             // System.out.println("SOAP Response:");
-           // soapResponse.writeTo(System.out); // Esto imprimirá la respuesta, si se recibe
-           // System.out.println();
+            // soapResponse.writeTo(System.out); // Esto imprimirá la respuesta, si se recibe
+            // System.out.println();
         } catch (Exception e) {
             System.err.println("Error en la invocación del servicio: " + e.getMessage());
             throw e; // Re-lanza para ver en qué línea ocurre el problema

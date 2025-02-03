@@ -5,6 +5,7 @@ import ar.edu.ubp.das.indecback.utils.Httpful;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SupermercadoRestService implements SupermercadoService {
 
@@ -19,42 +20,32 @@ public class SupermercadoRestService implements SupermercadoService {
         this.password = password;
     }
 
-    @Override
-    public List<SucursalBean> obtenerInformacionCompletaSucursales() {
-        Httpful client = new Httpful(baseUrl)
-                .path("/sucursales")
-                .method("GET")
-                .basicAuth(username, password);
-
-        return client.execute(new TypeToken<List<SucursalBean>>() {
-        }.getType());
-    }
 
     @Override
-    public List<ProductoCompletoBean> obtenerInformacionCompletaProductos() {
+    public <T> List <T> invocarServicio (Class<T> tipoRespuesta, String nombreOperacion, String metodo) {
         Httpful client = new Httpful(baseUrl)
-                .path("/informacionCompletaProductos")
-                .method("GET")
+                .path(nombreOperacion)
+                .method(metodo)
                 .basicAuth(username, password);
 
-        return client.execute(new TypeToken<List<ProductoCompletoBean>>() {
-        }.getType());
+        if (Objects.equals(nombreOperacion, "/sucursales")){
+            return client.execute(new TypeToken<List<SucursalBean>>() {
+            }.getType());
+        }
+        else if (Objects.equals(nombreOperacion, "/informacionCompletaProductos")){
+            return client.execute(new TypeToken<List<ProductoCompletoBean>>() {
+            }.getType());
+        }
+        else if (Objects.equals(nombreOperacion, "/informacionPreciosProductos")){
+            return client.execute(new TypeToken<List<PrecioProductoBean>>() {
+            }.getType());
+        }
+
+        return null;
     }
 
-    @Override
-    public List<PrecioProductoBean> obtenerInformacionPrecioProductos(){
-        Httpful client = new Httpful(baseUrl)
-                .path("/informacionPreciosProductos")
-                .method("GET")
-                .basicAuth(username, password);
-
-        return client.execute(new TypeToken<List<PrecioProductoBean>>() {
-        }.getType());
-    }
 
 }
-
-
 
 
 // ESTOS SERVICIOS NO SON NECESARIOS PARA CONSUMIR, ELIMINAR

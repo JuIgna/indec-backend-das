@@ -6,11 +6,9 @@ import java.util.List;
 
 
 public interface SupermercadoService {
-    List<ProductoCompletoBean> obtenerInformacionCompletaProductos();
 
-    List<SucursalBean> obtenerInformacionCompletaSucursales ();
-
-    List<PrecioProductoBean> obtenerInformacionPrecioProductos();
+    // Metodo sobrecargado para invocar un servicio de tipo Rest
+    <T> List <T> invocarServicio (Class<T> tipoRespuesta, String nombreOperacion, String metodo);
 
 }
     // SERVICIOS NO NECESARIOS, ELIMINAR

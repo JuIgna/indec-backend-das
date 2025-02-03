@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SupermercadoServiceFactory {
 
-    public SupermercadoService getService(SupermercadoBean supermercado) {
+    public SupermercadoService getService(SupermercadoBean supermercado) throws Exception {
         String tipoServicio = supermercado.getTipo_servicio();
 
         if ("REST".equalsIgnoreCase(tipoServicio)) {
