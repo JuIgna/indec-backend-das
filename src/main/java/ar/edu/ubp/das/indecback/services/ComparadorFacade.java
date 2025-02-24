@@ -2,11 +2,13 @@ package ar.edu.ubp.das.indecback.services;
 
 import ar.edu.ubp.das.indecback.beans.*;
 import ar.edu.ubp.das.indecback.repositories.IndecRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class ComparadorFacade {
@@ -16,103 +18,57 @@ public class ComparadorFacade {
     @Autowired
     private IndecRepository indecRepository;
 
-    private String nombreOperacion;
+    private Map<String, Object> config; // Configuracion cargada
 
-    public void actualizarSucursales() throws Exception {
-        // Obtener la lista de supermercados desde la base de datos de INDEC
-
-        List<SupermercadoBean> supermercados = indecRepository.obtenerSupermercados();
-
-        for (SupermercadoBean supermercado : supermercados) {
-            SupermercadoService supermercadoService = supermercadoServiceFactory.getService(supermercado);
-
-            List<SucursalBean> sucursales = List.of();
-
-            if ("REST".equalsIgnoreCase(supermercado.getTipo_servicio())){
-                nombreOperacion = "/sucursales";
-                sucursales = supermercadoService.invocarServicio(SucursalBean.class, nombreOperacion, "GET");
-            }
-            else if ("SOAP".equalsIgnoreCase(supermercado.getTipo_servicio())){
-                nombreOperacion = "ObtenerSucursalesCompletasRequest";
-                sucursales = supermercadoService.invocarServicio(SucursalBean.class, nombreOperacion, "");
-            }
-
-
-            for (SucursalBean sucursal : sucursales) {
-
-                System.out.printf(sucursal.getNom_sucursal());
-
-                // Buscar el nro_localidad usando nom_localidad, cod_provincia y cod_pais
-                Integer nroLocalidadIndec = indecRepository.obtenerNroLocalidad(
-                        sucursal.getNom_localidad(),
-                        sucursal.getCod_provincia(),
-                        sucursal.getCod_pais()
-                );
-
-                System.out.println("NRO LOCALIDAD: " + nroLocalidadIndec);
-
-                if (nroLocalidadIndec != null) {
-                    // Actualizar la sucursal en la base de datos de INDEC
-                    indecRepository.actualizarSucursal(sucursal, supermercado.getNro_supermercado(), nroLocalidadIndec);
-                } else {
-                    System.err.println("No se encontró la localidad en INDEC para la sucursal: " + sucursal.getNom_localidad());
-                }
-            }
-
-
+    public ComparadorFacade() {
+        try {
+            this.config = cargarConfiguracionDesdeRecursos("config.json");
+            System.out.println("JSON CARGADO CORRECTAMENTE");
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la configuración JSON", e);
         }
     }
 
-    public void actualizarInformacionProductos () throws Exception {
-        // Obtener la lista de supermercados desde la base de datos de INDEC
-        List<SupermercadoBean> supermercados = indecRepository.obtenerSupermercados();
-        List<ProductoCompletoBean> productos = new ArrayList<>();
-
-        for (SupermercadoBean supermercado : supermercados) {
-            SupermercadoService supermercadoService = supermercadoServiceFactory.getService(supermercado);
-
-
-            if ("REST".equalsIgnoreCase(supermercado.getTipo_servicio())){
-                 nombreOperacion = "/informacionCompletaProductos";
-                 productos = supermercadoService.invocarServicio(ProductoCompletoBean.class, nombreOperacion, "GET");
-            }
-            else if ("SOAP".equalsIgnoreCase(supermercado.getTipo_servicio())){
-                nombreOperacion = "ObtenerInformacionCompletaProductosRequest";
-                productos = supermercadoService.invocarServicio(ProductoCompletoBean.class, nombreOperacion, "");
-            }
-
-
-            for (ProductoCompletoBean producto : productos) {
-                System.out.println("NOM PRODUCTO : " + producto.getNom_producto());
-                indecRepository.actualizarProductos(producto);
-            }
-
-        }
+    private Map<String, Object> cargarConfiguracionDesdeRecursos(String rutaArchivo) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        InputStream inputStream = new ClassPathResource(rutaArchivo).getInputStream();
+        return objectMapper.readValue(inputStream, Map.class);
     }
 
-    public void actualizarPreciosProductos() throws Exception {
+    public void actualizarInformacionSupermercados(String tipoOperacion) throws Exception {
         // Obtener la lista de supermercados desde la base de datos de INDEC
         List<SupermercadoBean> supermercados = indecRepository.obtenerSupermercados();
-        List<PrecioProductoBean> precioProductos = List.of();
 
         for (SupermercadoBean supermercado : supermercados) {
-            SupermercadoService supermercadoService = supermercadoServiceFactory.getService(supermercado);
+            SupermercadoService supermercadoService = supermercadoServiceFactory.getService(supermercado, config);
 
-            if ("REST".equalsIgnoreCase(supermercado.getTipo_servicio())){
-                nombreOperacion = "/informacionPreciosProductos";
-                precioProductos = supermercadoService.invocarServicio(PrecioProductoBean.class, nombreOperacion, "GET");
-            }
-            else if ("SOAP".equalsIgnoreCase(supermercado.getTipo_servicio())){
-                nombreOperacion = "ObtenerInformacionPreciosProductosRequest";
-                precioProductos = supermercadoService.invocarServicio(PrecioProductoBean.class, nombreOperacion, "");
-            }
+            System.out.println("Actualizando informacion de supermercado: " + supermercado.getRazon_social());
+            System.out.println("URL de Servicio: " + supermercado.getUrl_servicio());
+            System.out.println("Realizando opreacion con clave: " + tipoOperacion);
 
-            for (PrecioProductoBean precioProducto : precioProductos) {
-                System.out.println("PRECIO  : " + precioProducto.getPrecio());
-                indecRepository.actualizarPreciosProductos(precioProducto, supermercado.getNro_supermercado());
-            }
 
+            // Invocar servicio con la operación obtenida del JSON
+            String jsonRespuesta = supermercadoService.invocarServicio(tipoOperacion);
+
+            switch (tipoOperacion) {
+                case "sucursales":
+                        System.out.println("JSON de SUCURSALES " + supermercado.getRazon_social() + " De Servicio " + supermercado.getTipo_servicio());
+                        System.out.println(jsonRespuesta);
+                        indecRepository.actualizarSucursal(jsonRespuesta, supermercado.getNro_supermercado());
+                        break;
+
+                case "productos":
+                        System.out.println("JSON de PRODUCTOS " + supermercado.getRazon_social() + " De Servicio " + supermercado.getTipo_servicio());
+                        System.out.println(jsonRespuesta);
+                        indecRepository.actualizarProductos(jsonRespuesta);
+                        break;
+
+                case "precios":
+                        System.out.println("JSON de PRECIOS " + supermercado.getRazon_social() + " De Servicio " + supermercado.getTipo_servicio());
+                        System.out.println(jsonRespuesta);
+                        indecRepository.actualizarPreciosProductos(jsonRespuesta, supermercado.getNro_supermercado());
+                        break;
+            }
         }
     }
-
 }

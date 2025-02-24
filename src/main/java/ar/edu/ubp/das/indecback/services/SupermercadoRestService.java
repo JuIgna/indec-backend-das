@@ -1,46 +1,35 @@
 package ar.edu.ubp.das.indecback.services;
 
-import ar.edu.ubp.das.indecback.beans.*;
 import ar.edu.ubp.das.indecback.utils.Httpful;
-import com.google.gson.reflect.TypeToken;
-
-import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
 public class SupermercadoRestService implements SupermercadoService {
 
     private  String baseUrl;
     private  String username;  // Usuario de autenticación
-    private  String password;  // Contraseña de autenticación
+    private  String password; // Contraseña de autenticación
+    private Map<String, Object> config;
 
-
-    public SupermercadoRestService(String baseUrl, String username, String password) {
+    public SupermercadoRestService(String baseUrl, String username, String password, Map<String, Object> config) {
         this.baseUrl = baseUrl;
         this.username = username;
         this.password = password;
+        this.config = config;
     }
 
-
     @Override
-    public <T> List <T> invocarServicio (Class<T> tipoRespuesta, String nombreOperacion, String metodo) {
+    public String invocarServicio (String nombreOperacion) {
+        Map<String, String> operacion = (Map<String, String>) config.get(nombreOperacion);
+
+        if (operacion == null){
+            throw new IllegalArgumentException("No se ha encontrado el servicio: " + nombreOperacion);
+        }
+
         Httpful client = new Httpful(baseUrl)
-                .path(nombreOperacion)
-                .method(metodo)
+                .path(operacion.get("operacion"))
+                .method(operacion.get("metodo"))
                 .basicAuth(username, password);
 
-        if (Objects.equals(nombreOperacion, "/sucursales")){
-            return client.execute(new TypeToken<List<SucursalBean>>() {
-            }.getType());
-        }
-        else if (Objects.equals(nombreOperacion, "/informacionCompletaProductos")){
-            return client.execute(new TypeToken<List<ProductoCompletoBean>>() {
-            }.getType());
-        }
-        else if (Objects.equals(nombreOperacion, "/informacionPreciosProductos")){
-            return client.execute(new TypeToken<List<PrecioProductoBean>>() {
-            }.getType());
-        }
-
-        return null;
+        return client.execute();
     }
 }

@@ -10,10 +10,17 @@ import jakarta.xml.ws.Dispatch;
 import jakarta.xml.ws.Service;
 import jakarta.xml.ws.soap.SOAPFaultException;
 import javax.xml.namespace.QName;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URL;
 import java.util.*;
+import org.json.JSONObject;
+import org.json.XML;
 
 public class SOAPClient {
     private String wsdlUrl;
@@ -94,9 +101,63 @@ public class SOAPClient {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
+
     public <T> List<T> callServiceForList(Class<T> clazz, String responseElementName) {
         return callServiceForList(clazz, responseElementName, null);
     }
+
+    public String callServiceForJson(String responseElementName, String objectResponseName, Map<String, Object> parameters) {
+        try {
+            SOAPMessage soapRequest = createRequest(parameters);
+            SOAPMessage soapResponse = sendRequest(soapRequest);
+
+            SOAPBody body = soapResponse.getSOAPBody();
+            if (body.hasFault()) {
+                SOAPFault fault = body.getFault();
+                throw new RuntimeException("SOAP Fault: " + fault.getFaultCode() + " - " + fault.getFaultString());
+            }
+
+            // Convertir el cuerpo SOAP en XML
+            Iterator<Node> iterator = body.getChildElements();
+            StringBuilder xmlBuilder = new StringBuilder();
+
+            while (iterator.hasNext()) {
+                Node node = iterator.next();
+                if (node instanceof SOAPElement) {
+                    SOAPElement element = (SOAPElement) node;
+                    if (element.getLocalName().equals(responseElementName)) {
+                        xmlBuilder.append(elementToString(element));
+                    }
+                }
+            }
+
+            // Convertir XML a JSON
+            JSONObject jsonResponse = XML.toJSONObject(xmlBuilder.toString());
+
+            // Extraer el objeto "SucursalesCompletasResponse"
+            JSONObject responseWrapper = jsonResponse.optJSONObject("ns3:" + responseElementName);
+            if (responseWrapper != null) {
+                Object sucursales = responseWrapper.opt(objectResponseName);
+                return sucursales.toString(); // Devolver solo el JSON de sucursales
+            }
+
+            return jsonResponse.toString(4); // Si falla, devuelve todo el JSON
+
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al invocar servicio SOAP: " + e.getMessage(), e);
+        }
+    }
+
+    private String elementToString(SOAPElement element) throws Exception {
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        StringWriter writer = new StringWriter();
+        transformer.transform(new DOMSource(element), new StreamResult(writer));
+        return writer.toString();
+    }
+
+
     private SOAPMessage createRequest(Map<String, Object> parameters) throws Exception {
         MessageFactory messageFactory = MessageFactory.newInstance(SOAPConstants.SOAP_1_1_PROTOCOL);
 

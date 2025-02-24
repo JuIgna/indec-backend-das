@@ -45,7 +45,7 @@ public class IndecResources {
             return ResponseEntity.badRequest().body(Collections.emptyList());
         }
 
-        List<PrecioMinProductoBean> preciosMinimos = indecRepository.obtenerPreciosMinimosProductos(req.getCodigos_barras());
+        List<PrecioMinProductoBean> preciosMinimos = indecRepository.obtenerPreciosMinimosProductos(req.getCodigos_barras(), req.getNro_localidad());
         return ResponseEntity.ok(preciosMinimos);
     }
 
@@ -77,8 +77,6 @@ public class IndecResources {
         return ResponseEntity.ok(sucursales);
     }
 
-
-
     @PostMapping ("/obtenerSucursalesProductoPrecioMinimo")
     public ResponseEntity<List<SucursalBean>> obtenerSucursalesPrecioMinimo (@RequestBody SucursalRequest req) {
         List<SucursalBean> sucursales = indecRepository.obtenerSucursalesPreciosMinimos(req);
@@ -86,15 +84,11 @@ public class IndecResources {
         return ResponseEntity.ok(sucursales);
     }
 
-
     @PostMapping("/obtenerSucursalesProductoPrecioMinimoLocalidad")
     public ResponseEntity<List<SucursalBean>> obtenerSucursalesPrecioMinimoLocalidad(@RequestBody SucursalRequest req) {
         List<SucursalBean> sucursales = indecRepository.obtenerSucursalesPreciosMinimosLocalidad(req);
 
         return ResponseEntity.ok(sucursales);
     }
-
-
-
 
 }

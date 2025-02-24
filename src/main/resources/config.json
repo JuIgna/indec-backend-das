@@ -1,0 +1,33 @@
+{
+  "rest": {
+    "sucursales": {
+      "operacion": "/sucursales",
+      "metodo": "GET"
+    },
+    "productos": {
+      "operacion": "/informacionCompletaProductos",
+      "metodo": "GET"
+    },
+    "precios": {
+      "operacion": "/informacionPreciosProductos",
+      "metodo": "GET"
+    }
+  },
+  "soap": {
+    "sucursales": {
+      "request": "ObtenerSucursalesCompletasRequest",
+      "response": "ObtenerSucursalesCompletasResponse",
+      "object" : "SucursalesCompletasResponse"
+    },
+    "productos": {
+      "request": "ObtenerInformacionCompletaProductosRequest",
+      "response": "ObtenerInformacionCompletaProductosResponse",
+      "object" : "InformacionCompletaProductosResponse"
+    },
+    "precios": {
+      "request": "ObtenerInformacionPreciosProductosRequest",
+      "response": "ObtenerInformacionPreciosProductosResponse",
+      "object" : "InformacionPreciosProductosResponse"
+    }
+  }
+}

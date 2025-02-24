@@ -1,17 +1,12 @@
 package ar.edu.ubp.das.indecback.batch;
 
 import ar.edu.ubp.das.indecback.IndecBackApplication;
-import ar.edu.ubp.das.indecback.beans.SucursalBean;
 import ar.edu.ubp.das.indecback.services.ComparadorFacade;
-import ar.edu.ubp.das.indecback.services.SupermercadoRestService;
-import ar.edu.ubp.das.indecback.services.SupermercadoSoapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 import java.util.Scanner;
 
 @Component
@@ -20,30 +15,12 @@ public class Ejecutor {
     @Autowired
     private ComparadorFacade comparadorFacade;
 
-    public void ejecutarActualizacionSucursales() {
+    public void ejecutarActualizacionInformacionSupermercados(String tipoOperacion) {
         try {
-            comparadorFacade.actualizarSucursales();
-            System.out.println("Actualización de sucursales completada exitosamente.");
+            comparadorFacade.actualizarInformacionSupermercados(tipoOperacion);
+            System.out.println("Actualización de " + tipoOperacion + "completada exitosamente.");
         } catch (Exception e) {
-            System.err.println("Error durante la actualización de sucursales: " + e.getMessage());
-        }
-    }
-
-    public void ejecutarActualizacionInformacionProductos () {
-        try {
-            comparadorFacade.actualizarInformacionProductos();
-            System.out.println("Actualización de informacion de productos exitoso.");
-        } catch (Exception e) {
-            System.err.println("Error en la actualizacion de los productos: " + e.getMessage());
-        }
-    }
-
-    public void ejecutarActualizacionPreciosProductos (){
-        try {
-            comparadorFacade.actualizarPreciosProductos();
-            System.out.println("/n Actualización de informacion de precios de productos exitoso.");
-        } catch (Exception e) {
-            System.err.println("Error en la actualizacion de los precios de productos: " + e.getMessage());
+            System.err.println("Error durante la actualización de: " + tipoOperacion + e.getMessage());
         }
     }
 
@@ -53,7 +30,7 @@ public class Ejecutor {
         int opcion;
 
         do {
-            System.out.println("/nSeleccione la acción que desea ejecutar:");
+            System.out.println("Seleccione la acción que desea ejecutar:");
             System.out.println("1. Actualizar Sucursales");
             System.out.println("2. Actualizar Productos");
             System.out.println("3. Actualizar Precios de Productos");
@@ -64,16 +41,18 @@ public class Ejecutor {
 
             switch (opcion) {
                 case 1:
-                    ejecutarActualizacionSucursales();
+                    ejecutarActualizacionInformacionSupermercados("sucursales");
                     break;
                 case 2:
-                    ejecutarActualizacionInformacionProductos();
+                    ejecutarActualizacionInformacionSupermercados("productos");
                     break;
                 case 3:
-                    ejecutarActualizacionPreciosProductos();
+                    ejecutarActualizacionInformacionSupermercados("precios");
+                    break;
                 case 4:
                     System.out.println("Saliendo del programa...");
                     break;
+
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
             }
@@ -85,21 +64,16 @@ public class Ejecutor {
         scanner.close();
     }
 
-
     public static void main(String[] args) {
         // Inicializa el contexto de Spring
         ApplicationContext context = new SpringApplicationBuilder(IndecBackApplication.class)
                 .web(WebApplicationType.NONE)  // Esto asegura que no se inicie un servidor web
                 .run(args);
-
         // Obtén el bean Ejecutor del contexto de Spring
         Ejecutor ejecutor = context.getBean(Ejecutor.class);
 
-
-        // Llama al menú
+        // Llama el menú
         ejecutor.mostrarMenu();
-
     }
-
 }
 
