@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class IndecRepository {
@@ -113,7 +116,6 @@ public class IndecRepository {
                 .addValue("cod_provincia", req.getCod_provincia());
 
         return jdbcCallFactory.executeQuery("obtener_localidades", "dbo", params, "localidades", LocalidadBean.class);
-
     }
 
 
@@ -160,8 +162,28 @@ public class IndecRepository {
 
         return jdbcCallFactory.executeQuery("comparar_precios", "dbo", params, "precios_minimos", PrecioMinProductoBean.class
         );
+    }
 
+    // Para regionalizacion
+    public List<IdiomaBean> obtenerIdiomas (){
+        return jdbcCallFactory.executeQuery("obtener_idiomas","dbo", "idiomas", IdiomaBean.class);
+    }
 
+    //obtener traduccion
+    public Map<String, List<?>> obtenerTraduccion(String codIdioma) {
+        SqlParameterSource params = new MapSqlParameterSource()
+                .addValue("cod_idioma", codIdioma);
+
+        Map<String, Object> resultados = jdbcCallFactory.executeQueryWithMultipleResults(
+                "obtener_traduccion", "dbo", params
+        );
+
+        Map<String, List<?>> resultado = new HashMap<>();
+        resultado.put("rubros", (List<RubroBean>) resultados.get("rubros"));
+        resultado.put("categorias", (List<CategoriaBean>) resultados.get("categorias"));
+        resultado.put("tipos_productos", (List<TipoProductoBean>) resultados.get("tipos_productos"));
+
+        return resultado;
     }
 
 }
