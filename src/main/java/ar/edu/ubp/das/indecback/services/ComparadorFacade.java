@@ -12,6 +12,7 @@ import java.util.Map;
 
 @Component
 public class ComparadorFacade {
+
     @Autowired
     private SupermercadoServiceFactory supermercadoServiceFactory;
 
@@ -23,7 +24,6 @@ public class ComparadorFacade {
     public ComparadorFacade() {
         try {
             this.config = cargarConfiguracionDesdeRecursos("config.json");
-            System.out.println("JSON CARGADO CORRECTAMENTE");
         } catch (Exception e) {
             throw new RuntimeException("Error al cargar la configuración JSON", e);
         }
@@ -35,9 +35,13 @@ public class ComparadorFacade {
         return objectMapper.readValue(inputStream, Map.class);
     }
 
-    public void actualizarInformacionSupermercados(String tipoOperacion) throws Exception {
+    public List<SupermercadoBean> obtenerSupermercados() {
+        return indecRepository.obtenerSupermercados();
+    }
+
+    public void actualizarInformacionOperacion(String tipoOperacion) throws Exception {
         // Obtener la lista de supermercados desde la base de datos de INDEC
-        List<SupermercadoBean> supermercados = indecRepository.obtenerSupermercados();
+        List<SupermercadoBean> supermercados = obtenerSupermercados();
 
         for (SupermercadoBean supermercado : supermercados) {
             SupermercadoService supermercadoService = supermercadoServiceFactory.getService(supermercado, config);
@@ -60,15 +64,53 @@ public class ComparadorFacade {
                 case "productos":
                         System.out.println("JSON de PRODUCTOS " + supermercado.getRazon_social() + " De Servicio " + supermercado.getTipo_servicio());
                         System.out.println(jsonRespuesta);
-                        indecRepository.actualizarProductos(jsonRespuesta);
+                        indecRepository.actualizarProductos(jsonRespuesta, supermercado.getNro_supermercado());
                         break;
 
                 case "precios":
                         System.out.println("JSON de PRECIOS " + supermercado.getRazon_social() + " De Servicio " + supermercado.getTipo_servicio());
                         System.out.println(jsonRespuesta);
+                    System.out.println("NRO_ " + supermercado.getNro_supermercado());
                         indecRepository.actualizarPreciosProductos(jsonRespuesta, supermercado.getNro_supermercado());
                         break;
             }
         }
     }
+
+    public void actualizarInformacionSupermerccado (SupermercadoBean supermercado, String tipoOperacion) throws Exception {
+        String[] operaciones;
+        String jsonRespuesta = "";
+
+        System.out.println("Actualizando informacion de supermercado: " + supermercado.getRazon_social());
+        System.out.println("URL de Servicio: " + supermercado.getUrl_servicio());
+
+        SupermercadoService supermercadoService = supermercadoServiceFactory.getService(supermercado, config);
+
+        if (tipoOperacion.isEmpty()) {
+            operaciones = new String []{"sucursales", "productos", "precios"};
+        }else {
+            operaciones = new String [] {tipoOperacion};
+        }
+
+        for (String operacion : operaciones) {
+            System.out.println("Ejecutando operacion con clave: " + operacion);
+
+            jsonRespuesta = supermercadoService.invocarServicio(operacion);
+
+            switch (operacion) {
+                case "sucursales":
+                    indecRepository.actualizarSucursal(jsonRespuesta, supermercado.getNro_supermercado());
+                    break;
+                case "productos":
+                    indecRepository.actualizarProductos(jsonRespuesta, supermercado.getNro_supermercado());
+                    break;
+                case "precios":
+                    indecRepository.actualizarPreciosProductos(jsonRespuesta, supermercado.getNro_supermercado());
+                    break;
+            }
+        }
+
+    }
+
+
 }

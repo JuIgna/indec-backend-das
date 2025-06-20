@@ -64,9 +64,10 @@ public class IndecRepository {
 
 
     // Metodo para actualizar los productos en indec
-    public void actualizarProductos(String jsonProductos) {
+    public void actualizarProductos(String jsonProductos, int nroSupermercado) {
         SqlParameterSource params = new MapSqlParameterSource()
-                .addValue("json_productos", jsonProductos);
+                .addValue("json_productos", jsonProductos)
+                .addValue("nro_supermercado", nroSupermercado);
 
         jdbcCallFactory.execute("actualizar_productos", "dbo", params);
     }
