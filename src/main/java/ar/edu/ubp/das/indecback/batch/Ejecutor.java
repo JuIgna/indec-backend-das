@@ -1,10 +1,8 @@
 package ar.edu.ubp.das.indecback.batch;
 
 import ar.edu.ubp.das.indecback.IndecBackApplication;
-import ar.edu.ubp.das.indecback.beans.SucursalBean;
+import ar.edu.ubp.das.indecback.beans.SupermercadoBean;
 import ar.edu.ubp.das.indecback.services.ComparadorFacade;
-import ar.edu.ubp.das.indecback.services.SupermercadoRestService;
-import ar.edu.ubp.das.indecback.services.SupermercadoSoapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -20,72 +18,153 @@ public class Ejecutor {
     @Autowired
     private ComparadorFacade comparadorFacade;
 
-    public void ejecutarActualizacionSucursales() {
+    public void ejecutarActualizacionInformacionPorOperaciones(String tipoOperacion) {
         try {
-            comparadorFacade.actualizarSucursales();
-            System.out.println("Actualización de sucursales completada exitosamente.");
+            comparadorFacade.actualizarInformacionOperacion(tipoOperacion);
+            System.out.println("Actualización de " + tipoOperacion + "completada exitosamente.");
         } catch (Exception e) {
-            System.err.println("Error durante la actualización de sucursales: " + e.getMessage());
+            System.err.println("Error durante la actualización de: " + tipoOperacion + e.getMessage());
         }
     }
 
-    public void ejecutarActualizacionInformacionProductos () {
+    public void ejecutarActualizacionInformacionPorSupermercados (SupermercadoBean supermercado, String tipoOperacion) {
         try {
-            comparadorFacade.actualizarInformacionProductos();
-            System.out.println("Actualización de informacion de productos exitoso.");
+            comparadorFacade.actualizarInformacionSupermerccado(supermercado, tipoOperacion);
+            System.out.println("Actualización de " + supermercado.getRazon_social() + " completada exitosamente.");
+            if (tipoOperacion.isEmpty()){
+                System.out.println("Operacion Actualizada: Todo el Supermercado");
+            }else
+                System.out.println("Operacion Actualizada: " + tipoOperacion);
         } catch (Exception e) {
-            System.err.println("Error en la actualizacion de los productos: " + e.getMessage());
+            System.err.println("Error durante la actualización de: " + supermercado.getRazon_social() + e.getMessage());
         }
     }
 
-    public void ejecutarActualizacionPreciosProductos (){
-        try {
-            comparadorFacade.actualizarPreciosProductos();
-            System.out.println("/n Actualización de informacion de precios de productos exitoso.");
-        } catch (Exception e) {
-            System.err.println("Error en la actualizacion de los precios de productos: " + e.getMessage());
-        }
-    }
-/*
-    public void ejecutarActualizacionUbicaciones (){
-        try {
-            comparadorFacade.actualizarUbicaciones();
-            System.out.println("/nActualización de ubicaciones exitoso.");
-        } catch (Exception e) {
-            System.err.println("Error en la actualizacion de las ubicaciones: " + e.getMessage());
-        }
+
+
+    public void menuPrincipal() {
+        Scanner scanner = new Scanner(System.in);
+        int opcion = 0;
+
+        do{
+            System.out.println("-------------------------- MENU DE ACTUALIZACION DE DATOS -----------------------------------------------");
+            System.out.println("1. Actualizar Datos Por Supermercados ");
+            System.out.println("2. Actualizar Datos Por Operaciones");
+            System.out.println("3. Finalizar Actualizacion de Datos");
+            System.out.println("Ingrese su Opcion --> ");
+            System.out.println("------------------------------------------------------------------------------------------------");
+
+            opcion = scanner.nextInt();
+
+            switch (opcion){
+                case 1: menuSupermercados();
+                    break;
+                case 2: menuOperaciones();
+                    break;
+                default: break;
+            }
+        }while (opcion != 3);
     }
 
- */
+    public void menuSupermercados() {
+        Scanner scanner = new Scanner(System.in);
+        List<SupermercadoBean> supermercados = comparadorFacade.obtenerSupermercados();
 
-    // Método para mostrar el menú y ejecutar la opción seleccionada
-    public void mostrarMenu() {
+        int opcion;
+
+        do {
+            System.out.println("---------------------------- Actualización Por Supermercados ---------------------------------------------");
+
+            for (int i = 0; i < supermercados.size(); i++) {
+                SupermercadoBean supermercado = supermercados.get(i);
+                System.out.println(supermercado.getNro_supermercado() + ". " +
+                        "Actualizar Datos de Supermercado " + supermercado.getRazon_social() +
+                        " De Tipo: " + supermercado.getTipo_servicio());
+            }
+
+            System.out.println(supermercados.size() + 1 + ". Salir");
+            System.out.println("------------------------------------------------------------------------------------------");
+
+            opcion = scanner.nextInt();
+
+            if (opcion > 0 && opcion <= supermercados.size()) {
+                SupermercadoBean supermercadoSeleccionado = supermercados.get(opcion - 1);
+                menuOperacionesPorSupermercado(supermercadoSeleccionado);
+
+            } else if (opcion != supermercados.size() + 1) {
+                System.out.println("Opción inválida, intente nuevamente.");
+            }
+
+        } while (opcion != supermercados.size() + 1);
+    }
+
+    public void menuOperacionesPorSupermercado(SupermercadoBean supermercado) {
         Scanner scanner = new Scanner(System.in);
         int opcion;
 
         do {
-            System.out.println("/nSeleccione la acción que desea ejecutar:");
-            System.out.println("1. Actualizar Paises, Provincias y Localidades");
-            System.out.println("2. Actualizar Sucursales");
-            System.out.println("3. Actualizar Información de Productos");
-            System.out.println("4. Actualizar Precios de Productos");
-            System.out.println("5. Salir");
+            System.out.println("Seleccione la operación a actualizar en " + supermercado.getRazon_social() + ":");
+            System.out.println("1. Actualizar Sucursales");
+            System.out.println("2. Actualizar Productos");
+            System.out.println("3. Actualizar Precios de Productos");
+            System.out.println("4. Actualizar Todo el Supermercado");
+            System.out.println("5. Volver al menú anterior");
 
             System.out.print("Ingrese su opción: ");
             opcion = scanner.nextInt();
 
             switch (opcion) {
                 case 1:
-                    ejecutarActualizacionSucursales();
+                    ejecutarActualizacionInformacionPorSupermercados(supermercado, "sucursales");
                     break;
                 case 2:
-                    ejecutarActualizacionInformacionProductos();
+                    ejecutarActualizacionInformacionPorSupermercados(supermercado, "productos");
                     break;
                 case 3:
-                    ejecutarActualizacionPreciosProductos();
+                    ejecutarActualizacionInformacionPorSupermercados(supermercado, "precios");
+                    break;
+                case 4:
+                    ejecutarActualizacionInformacionPorSupermercados(supermercado,"");
+                case 5:
+                    System.out.println("Regresando al menú de supermercados...");
+                    break;
+                default:
+                    System.out.println("Opción inválida. Intente nuevamente.");
+            }
+
+        } while (opcion != 5);
+    }
+
+
+    // Método para mostrar el menú y ejecutar la opción seleccionada
+    public void menuOperaciones() {
+        Scanner scanner = new Scanner(System.in);
+        int opcion = 0;
+
+        do {
+            System.out.println("Seleccione la acción que desea ejecutar:");
+            System.out.println("1. Actualizar Sucursales");
+            System.out.println("2. Actualizar Productos");
+            System.out.println("3. Actualizar Precios de Productos");
+            System.out.println("4. Salir");
+
+            System.out.print("Ingrese su opción: ");
+            opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    ejecutarActualizacionInformacionPorOperaciones("sucursales");
+                    break;
+                case 2:
+                    ejecutarActualizacionInformacionPorOperaciones("productos");
+                    break;
+                case 3:
+                    ejecutarActualizacionInformacionPorOperaciones("precios");
+                    break;
                 case 4:
                     System.out.println("Saliendo del programa...");
                     break;
+
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
             }
@@ -97,56 +176,16 @@ public class Ejecutor {
         scanner.close();
     }
 
-
     public static void main(String[] args) {
         // Inicializa el contexto de Spring
         ApplicationContext context = new SpringApplicationBuilder(IndecBackApplication.class)
                 .web(WebApplicationType.NONE)  // Esto asegura que no se inicie un servidor web
                 .run(args);
-
         // Obtén el bean Ejecutor del contexto de Spring
         Ejecutor ejecutor = context.getBean(Ejecutor.class);
 
-
-        // Llama al menú
-        ejecutor.mostrarMenu();
-
+        // Llama el menú
+        ejecutor.menuPrincipal();
     }
-
-/*
-    public void ejecutarPruebaSucursalesSoap() {
-        SupermercadoSoapService soapService = new SupermercadoSoapService();
-        try {
-            List<SucursalBean> sucursales = soapService.obtenerInformacionCompletaSucursales();
-
-            sucursales.forEach(sucursal -> {
-                System.out.println("Sucursal: " + sucursal.getNom_sucursal());
-                System.out.println("Calle: " + sucursal.getCalle());
-                System.out.println("Teléfonos: " + sucursal.getTelefonos());
-                // Agrega más campos si es necesario.
-                System.out.println("---------------------------------");
-            });
-        } catch (Exception e) {
-            System.err.println("Error al obtener las sucursales SOAP: " + e.getMessage());
-        }
-    }
-
-    public void ejecutarPruebaSucursalesRest() {
-        SupermercadoRestService restService = new SupermercadoRestService();
-        try {
-            List<SucursalBean> sucursales = restService.obtenerInformacionCompletaSucursales();
-            sucursales.forEach(sucursal -> {
-                System.out.println("Sucursal: " + sucursal.getNom_sucursal());
-                System.out.println("Calle: " + sucursal.getCalle());
-                System.out.println("Teléfonos: " + sucursal.getTelefonos());
-                // Agrega más campos si es necesario.
-                System.out.println("---------------------------------");
-            });
-        } catch (Exception e) {
-            System.err.println("Error al obtener las sucursales REST: " + e.getMessage());
-        }
-    }
-
-*/
 }
 

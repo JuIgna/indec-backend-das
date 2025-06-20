@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://services.supermercadows.das.ubp.edu.ar/" xmlns:tns="http://services.supermercadows.das.ubp.edu.ar/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="ObtenerInformacionCompletaProductosRequest" type="tns:ObtenerInformacionCompletaProductosRequest"/>
+
+  <xs:element name="ObtenerInformacionCompletaProductosResponse" type="tns:ObtenerInformacionCompletaProductosResponse"/>
+
+  <xs:element name="ObtenerInformacionPreciosProductosRequest" type="tns:ObtenerInformacionPreciosProductosRequest"/>
+
+  <xs:element name="ObtenerInformacionPreciosProductosResponse" type="tns:ObtenerInformacionPreciosProductosResponse"/>
+
+  <xs:element name="ObtenerSucursalesCompletasRequest" type="tns:ObtenerSucursalesCompletasRequest"/>
+
+  <xs:element name="ObtenerSucursalesCompletasResponse" type="tns:ObtenerSucursalesCompletasResponse"/>
+
+  <xs:complexType name="ObtenerInformacionPreciosProductosRequest">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="ObtenerInformacionPreciosProductosResponse">
+    <xs:sequence>
+      <xs:element name="InformacionPreciosProductosResponse" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ObtenerInformacionCompletaProductosRequest">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="ObtenerInformacionCompletaProductosResponse">
+    <xs:sequence>
+      <xs:element name="InformacionCompletaProductosResponse" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ObtenerSucursalesCompletasRequest">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="ObtenerSucursalesCompletasResponse">
+    <xs:sequence>
+      <xs:element name="SucursalesCompletasResponse" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

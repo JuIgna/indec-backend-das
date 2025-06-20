@@ -1,4 +1,7 @@
 package ar.edu.ubp.das.indecback.components;
+import ar.edu.ubp.das.indecback.beans.CategoriaBean;
+import ar.edu.ubp.das.indecback.beans.RubroBean;
+import ar.edu.ubp.das.indecback.beans.TipoProductoBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,6 +22,15 @@ public class SimpleJdbcCallFactory {
     public <T> Map<String, Object> executeQueryWithOutputs(String procedureName, String schemaName, SqlParameterSource params, String resultSetName, Class<T> mappedClass) {
         SimpleJdbcCall jdbcCall = createCall(procedureName, schemaName)
                 .returningResultSet(resultSetName, BeanPropertyRowMapper.newInstance(mappedClass));
+        return jdbcCall.execute(params);
+    }
+
+    // Para manejar traducciones, MEJORAR
+    public Map<String, Object> executeQueryWithMultipleResults(String procedureName, String schemaName, SqlParameterSource params) {
+        SimpleJdbcCall jdbcCall = createCall(procedureName, schemaName)
+                .returningResultSet("rubros", BeanPropertyRowMapper.newInstance(RubroBean.class))
+                .returningResultSet("categorias", BeanPropertyRowMapper.newInstance(CategoriaBean.class))
+                .returningResultSet("tipos_productos", BeanPropertyRowMapper.newInstance(TipoProductoBean.class));
         return jdbcCall.execute(params);
     }
 

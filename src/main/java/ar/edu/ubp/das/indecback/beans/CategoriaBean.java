@@ -2,11 +2,10 @@ package ar.edu.ubp.das.indecback.beans;
 
 public class CategoriaBean {
     private int nro_categoria;
+    private int nro_rubro;
     private String nom_categoria;
 
-    public CategoriaBean (){
-
-    }
+    public CategoriaBean (){}
 
     public int getNro_categoria() {
         return nro_categoria;
@@ -22,5 +21,13 @@ public class CategoriaBean {
 
     public void setNom_categoria(String nom_categoria) {
         this.nom_categoria = nom_categoria;
+    }
+
+    public int getNro_rubro() {
+        return nro_rubro;
+    }
+
+    public void setNro_rubro(int nro_rubro) {
+        this.nro_rubro = nro_rubro;
     }
 }

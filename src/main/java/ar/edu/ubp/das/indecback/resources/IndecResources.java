@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/indec")
@@ -45,7 +46,7 @@ public class IndecResources {
             return ResponseEntity.badRequest().body(Collections.emptyList());
         }
 
-        List<PrecioMinProductoBean> preciosMinimos = indecRepository.obtenerPreciosMinimosProductos(req.getCodigos_barras());
+        List<PrecioMinProductoBean> preciosMinimos = indecRepository.obtenerPreciosMinimosProductos(req.getCodigos_barras(), req.getNro_localidad());
         return ResponseEntity.ok(preciosMinimos);
     }
 
@@ -77,15 +78,12 @@ public class IndecResources {
         return ResponseEntity.ok(sucursales);
     }
 
-
-
     @PostMapping ("/obtenerSucursalesProductoPrecioMinimo")
     public ResponseEntity<List<SucursalBean>> obtenerSucursalesPrecioMinimo (@RequestBody SucursalRequest req) {
         List<SucursalBean> sucursales = indecRepository.obtenerSucursalesPreciosMinimos(req);
 
         return ResponseEntity.ok(sucursales);
     }
-
 
     @PostMapping("/obtenerSucursalesProductoPrecioMinimoLocalidad")
     public ResponseEntity<List<SucursalBean>> obtenerSucursalesPrecioMinimoLocalidad(@RequestBody SucursalRequest req) {
@@ -94,7 +92,18 @@ public class IndecResources {
         return ResponseEntity.ok(sucursales);
     }
 
+    // Endpoints para regionalizacion
+    @GetMapping("/obtenerIdiomas")
+    public ResponseEntity<List<IdiomaBean>> obtenerIdiomas () {
+        List<IdiomaBean> idiomas = indecRepository.obtenerIdiomas();
+        return ResponseEntity.ok(idiomas);
+    }
 
+    @PostMapping("/obtenerTraducciones")
+    public ResponseEntity<Map<String, List<?>>> obtenerTraduccion(@RequestBody TraduccionRequest req) {
+        Map<String, List<?>> traduccion = indecRepository.obtenerTraduccion(req.getCod_idioma());
 
+        return ResponseEntity.ok(traduccion);
+    }
 
 }

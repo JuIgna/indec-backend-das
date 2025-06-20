@@ -1,126 +1,54 @@
 package ar.edu.ubp.das.indecback.services;
 
-import ar.edu.ubp.das.indecback.beans.*;
 import ar.edu.ubp.das.indecback.utils.SOAPClient;
-
-import java.util.List;
+import ar.edu.ubp.das.indecback.utils.SoapConfig;
+import ar.edu.ubp.das.indecback.utils.WSDLParser;
+import java.util.Map;
 
 public class SupermercadoSoapService implements SupermercadoService {
-
-    private final SOAPClient soapClientSucursalesCompletas;
-
-    private final SOAPClient soapClientProductos;
-    private final SOAPClient soapClientPreciosProductos;
-
-
-    public SupermercadoSoapService(String wsdlUrl, String cuit, String token) {
-        this.soapClientSucursalesCompletas = new SOAPClient.SOAPClientBuilder()
-                .wsdlUrl(wsdlUrl)
-                .namespace("http://services.supermercadows.das.ubp.edu.ar/")
-                .serviceName("SupermercadoWSPortService")
-                .portName("SupermercadoWSPortSoap11")
-                .operationName("ObtenerSucursalesCompletasRequest")
-                .username(cuit)  // Coloca el usuario de autenticación
-                .password(token)  // Coloca la contraseña de autenticación
-                .build();
-
-        this.soapClientProductos = new SOAPClient.SOAPClientBuilder()
-                .wsdlUrl(wsdlUrl)
-                .namespace("http://services.supermercadows.das.ubp.edu.ar/")
-                .serviceName("SupermercadoWSPortService") // fijate que este bien
-                .portName("SupermercadoWSPortSoap11") // fijate que este bien
-                .operationName("ObtenerInformacionCompletaProductosRequest") // Aca va el request
-                .username(cuit)  // Coloca el usuario de autenticación
-                .password(token)  // Coloca la contraseña de autenticación
-                .build();
-
-        this.soapClientPreciosProductos = new SOAPClient.SOAPClientBuilder()
-                .wsdlUrl(wsdlUrl)
-                .namespace("http://services.supermercadows.das.ubp.edu.ar/")
-                .serviceName("SupermercadoWSPortService") // fijate que este bien
-                .portName("SupermercadoWSPortSoap11") // fijate que este bien
-                .operationName("ObtenerInformacionPreciosProductosRequest") // Aca va el request
-                .username(cuit)  // Coloca el usuario de autenticación
-                .password(token)  // Coloca la contraseña de autenticación
-                .build();
+    private SOAPClient soapClient;
+    private SoapConfig soapConfig;
+    private String wsdlUrl;
+    private String cuit;
+    private String token;
+    private Map<String, Object> config;
 
 
-
-    }
-    @Override
-    public List<ProductoCompletoBean> obtenerInformacionCompletaProductos() {
-        return soapClientProductos.callServiceForList(ProductoCompletoBean.class, "ObtenerInformacionCompletaProductosResponse");
-        // El response va como el segunto parametro
+    public SupermercadoSoapService(String wsdlUrl, String cuit, String token, Map<String, Object> config) throws Exception {
+        this.wsdlUrl = wsdlUrl;
+        this.cuit = cuit;
+        this.token = token;
+        this.soapConfig = WSDLParser.parse(wsdlUrl);
+        this.config = config;
     }
 
     @Override
-    public List<SucursalBean> obtenerInformacionCompletaSucursales (){
-        return soapClientSucursalesCompletas.callServiceForList(SucursalBean.class, "ObtenerSucursalesCompletasResponse");
+    public String invocarServicio (String nombreOperacion){
+        Map<String, String> operacion = (Map<String, String>) config.get(nombreOperacion);
+
+        if (operacion == null) {
+            throw new IllegalArgumentException("Operación no encontrada: " + nombreOperacion);
+        }
+
+        try{
+            SOAPClient client = new SOAPClient.SOAPClientBuilder()
+                    .wsdlUrl(wsdlUrl)
+                    .namespace(soapConfig.getNamespace())
+                    .serviceName(soapConfig.getServiceName())
+                    .portName(soapConfig.getPortName())
+                    .operationName(operacion.get("request"))
+                    .username(cuit)  // Coloca el usuario de autenticación
+                    .password(token)  // Coloca la contraseña de autenticación
+                    .build();
+
+            return client.callServiceForJson(operacion.get("response"), operacion.get("object"), null);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return "{}";
+        }
+
     }
-
-    @Override
-    public List<PrecioProductoBean> obtenerInformacionPrecioProductos (){
-        return soapClientPreciosProductos.callServiceForList(PrecioProductoBean.class, "ObtenerInformacionPreciosProductosResponse");
-    }
-
-
 }
 
 
-        /*
-        this.soapClientPaises = new SOAPClient.SOAPClientBuilder()
-                .wsdlUrl("http://localhost:8080/services/supermercado.wsdl")
-                .namespace("http://services.supermercadows.das.ubp.edu.ar/")
-                .serviceName("SupermercadoWSPortService")
-                .portName("SupermercadoWSPortSoap11")
-                .operationName("ObtenerPaisesRequest")  // Operation para obtener países
-                .username("WS123")
-                .password("WS123")
-                .build();
-
-        this.soapClientProvincias = new SOAPClient.SOAPClientBuilder()
-                .wsdlUrl("http://localhost:8080/services/supermercado.wsdl")
-                .namespace("http://services.supermercadows.das.ubp.edu.ar/")
-                .serviceName("SupermercadoWSPortService")
-                .portName("SupermercadoWSPortSoap11")
-                .operationName("ObtenerProvinciasRequest")  // Operation para obtener provincias
-                .username("WS123")
-                .password("WS123")
-                .build();
-
-        this.soapClientLocalidades = new SOAPClient.SOAPClientBuilder()
-                .wsdlUrl("http://localhost:8080/services/supermercado.wsdl")
-                .namespace("http://services.supermercadows.das.ubp.edu.ar/")
-                .serviceName("SupermercadoWSPortService")
-                .portName("SupermercadoWSPortSoap11")
-                .operationName("ObtenerLocalidadesRequest")  // Operation para obtener localidades
-                .username("WS123")
-                .password("WS123")
-                .build();
-*/
-
-
-// SERVICIOS NO NECESARIOS, ELIMINAR
-
-    /*
-    @Override
-    public List<PaisBean> obtenerPaises() {
-        return soapClientPaises.callServiceForList(PaisBean.class, "ObtenerPaisesResponse");
-    }
-
-    @Override
-    public List<ProvinciaIndecBean> obtenerProvincias() {
-        return soapClientProvincias.callServiceForList(ProvinciaIndecBean.class, "ObtenerProvinciasResponse");
-    }
-
-    @Override
-    public List<LocalidadIndecBean> obtenerLocalidades() {
-        return soapClientLocalidades.callServiceForList(LocalidadIndecBean.class, "ObtenerLocalidadesResponse");
-    }
-
-
-    @Override
-    public List<SupermercadoBean> obtenerSupermercados() {
-        return List.of();
-    }
-    */

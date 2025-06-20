@@ -76,6 +76,8 @@
 
         <!-- Dependencias Para el Consumo de Servicios SOAP -->
 
+
+
         <!-- Dependencias de Jakarta para SOAP y JAXB -->
         <dependency>
             <groupId>jakarta.xml.ws</groupId>
@@ -99,6 +101,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- Dependencias Para Manejo del JSON -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20230227</version>
         </dependency>
 
 

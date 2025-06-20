@@ -69,6 +69,26 @@ public class Httpful {
         return executeRequest(responseType);
     }
 
+    // Nuevo execute usando el nuevo metodo executeAsString
+    public String execute() {
+        return executeRequestAsString();
+    }
+
+    // Nueva funcion para recibir el JSON de forma String
+    private String executeRequestAsString() {
+        Response response = sendRequest();
+        if (response.getStatus() == 200) {
+            return response.readEntity(String.class);  // 🔹 Devuelve JSON crudo como String
+        }
+        else {
+            String errorMessage = response.readEntity(String.class);
+            throw new RuntimeException("Error en la solicitud: " +
+                    response.getStatus() + ": " + errorMessage);
+        }
+    }
+
+
+
     private <T> T executeRequest(Object responseType) {
         Response response = sendRequest();
         if (response.getStatus() == 200) {
