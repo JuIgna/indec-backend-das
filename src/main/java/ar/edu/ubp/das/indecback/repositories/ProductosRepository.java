@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.stereotype.Repository;
 
 import ar.edu.ubp.das.indecback.beans.CategoriaBean;
 import ar.edu.ubp.das.indecback.beans.ProductoBean;
@@ -12,6 +13,7 @@ import ar.edu.ubp.das.indecback.beans.SupermercadoBean;
 import ar.edu.ubp.das.indecback.components.SimpleJdbcCallFactory;
 import ar.edu.ubp.das.indecback.requests.CategoriaRequest;
 
+@Repository
 public class ProductosRepository {
     @Autowired
     private SimpleJdbcCallFactory jdbcCallFactory;

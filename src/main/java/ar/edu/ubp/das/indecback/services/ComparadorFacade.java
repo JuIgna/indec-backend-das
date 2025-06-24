@@ -1,7 +1,6 @@
 package ar.edu.ubp.das.indecback.services;
 
 import ar.edu.ubp.das.indecback.beans.*;
-import ar.edu.ubp.das.indecback.repositories.IndecRepository;
 import ar.edu.ubp.das.indecback.repositories.PreciosRepository;
 import ar.edu.ubp.das.indecback.repositories.ProductosRepository;
 import ar.edu.ubp.das.indecback.repositories.SucursalesRepository;
@@ -18,9 +17,6 @@ public class ComparadorFacade {
 
     @Autowired
     private SupermercadoServiceFactory supermercadoServiceFactory;
-
-    @Autowired
-    private IndecRepository indecRepository;
     @Autowired
     private SucursalesRepository sucursalesRepository;
     @Autowired
