@@ -23,7 +23,7 @@ import ar.edu.ubp.das.indecback.requests.SucursalesLocalidadesRequest;
 @RestController
 @RequestMapping("/ubicaciones")
 public class SucursalesResources {
-    
+
     @Autowired
     private SucursalesRepository sucursalesRepository;
 
@@ -50,6 +50,12 @@ public class SucursalesResources {
     @PostMapping("/obtenerSucursalesLocalidad")
     public ResponseEntity<List<SucursalBean>> obtenerSucursalesLocalidad(
             @RequestBody SucursalesLocalidadesRequest req) {
+        if (req == null || req.getNro_localidad() == null || req.getLista_supermercados() == null) {
+            System.out.println("Request nulo o incompleto: " + req.getNro_localidad() + ", " + req.getLista_supermercados().size() );
+            return ResponseEntity.badRequest().build();
+        }
+        System.out.println("Request recibido: " + req.getNro_localidad() + ", "
+                + (req.getLista_supermercados() != null ? req.getLista_supermercados().size() : 0));
         List<SucursalBean> sucursales = sucursalesRepository.obtenerSucursalesLocalidad(req);
 
         return ResponseEntity.ok(sucursales);

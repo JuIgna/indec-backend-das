@@ -47,7 +47,8 @@ public class SucursalesRepository {
     // Obtener sucursales de una localidad
     public List<SucursalBean> obtenerSucursalesLocalidad(SucursalesLocalidadesRequest req) {
         SqlParameterSource params = new MapSqlParameterSource()
-                .addValue("nro_localidad", req.getNro_localidad());
+                .addValue("nro_localidad", req.getNro_localidad())
+                .addValue("lista_supermercados", req.getLista_supermercados());
 
         return jdbcCallFactory.executeQuery("obtener_sucursales_por_localidad", "dbo", params, "sucursalesLocalidad",
                 SucursalBean.class);
