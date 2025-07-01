@@ -52,12 +52,18 @@ public class SucursalesResources {
             @RequestBody SucursalesLocalidadesRequest req) {
         if (req == null || req.getNro_localidad() == null || req.getLista_supermercados() == null) {
             System.out.println("Request nulo o incompleto: " + req.getNro_localidad() + ", " + req.getLista_supermercados().size() );
+           
             return ResponseEntity.badRequest().build();
         }
-        System.out.println("Request recibido: " + req.getNro_localidad() + ", "
-                + (req.getLista_supermercados() != null ? req.getLista_supermercados().size() : 0));
-        List<SucursalBean> sucursales = sucursalesRepository.obtenerSucursalesLocalidad(req);
 
+        for (String supermercado : req.getLista_supermercados()) {
+            System.out.println("Supermercado: " + supermercado);
+        }
+        List<SucursalBean> sucursales = sucursalesRepository.obtenerSucursalesLocalidad(req);
+        for (SucursalBean sucursal : sucursales) {
+            System.out.println("Sucursal obtenida: " + sucursal);
+        }
+        
         return ResponseEntity.ok(sucursales);
     }
 

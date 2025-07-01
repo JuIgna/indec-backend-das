@@ -23,6 +23,8 @@ public class PreciosResources {
     
     @PostMapping("/compararPrecios")
     public ResponseEntity<List<PrecioMinProductoBean>> obtenerPreciosMinimos(@RequestBody CompararPreciosRequest req) {
+
+        System.out.println("REQUEST RECIBIDO: " + req.getCodigos_barras() + ", " + req.getNro_localidad());
         if (req.getCodigos_barras() == null || req.getCodigos_barras().isEmpty()) {
             return ResponseEntity.badRequest().body(Collections.emptyList());
         }

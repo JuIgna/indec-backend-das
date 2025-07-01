@@ -643,8 +643,9 @@ exec dbo.obtener_localidades @cod_pais ='AR', @cod_provincia = 'CBA'
 
 
 -- SUCURSALES POR LOCALIDAD
-CREATE  or alter PROCEDURE dbo.obtener_sucursales_por_localidad
-    @nro_localidad INT
+CREATE or alter PROCEDURE dbo.obtener_sucursales_por_localidad
+    @nro_localidad INT,
+	@lista_supermercados VARCHAR (MAX)	
 AS
 BEGIN
     SELECT 
@@ -674,9 +675,72 @@ BEGIN
     JOIN 
         supermercados sm ON s.nro_supermercado = sm.nro_supermercado
     WHERE
-        s.nro_localidad = @nro_localidad;
+        s.nro_localidad = @nro_localidad
+		AND s.nro_supermercado IN (
+			SELECT TRY_CAST (value AS INT)
+			FROM STRING_SPLIT (@lista_supermercados, ',')
+			WHERE TRY_CAST (value AS INT) IS NOT NULL
+			);
 END;
 GO
+
+
+CREATE OR ALTER PROCEDURE dbo.obtener_sucursales_por_localidad
+    @nro_localidad INT,
+    @lista_supermercados VARCHAR(MAX)	
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Tabla temporal para almacenar los supermercados
+    CREATE TABLE #SupermercadosSolicitados (
+        nro_supermercado INT
+    );
+
+    -- Insertar los supermercados en la tabla temporal
+    INSERT INTO #SupermercadosSolicitados (nro_supermercado)
+    SELECT DISTINCT TRY_CAST(value AS INT)
+    FROM STRING_SPLIT(@lista_supermercados, ',')
+    WHERE TRY_CAST(value AS INT) IS NOT NULL;
+
+    -- Consulta principal
+    SELECT 
+        s.nro_supermercado,
+        sm.razon_social AS nom_supermercado,
+        s.nro_sucursal,
+        s.nom_sucursal,
+        s.calle,
+        s.nro_calle,
+        s.telefonos,
+        s.coord_latitud,
+        s.coord_longitud,
+        s.horario_sucursal,
+        s.servicios_disponibles,
+        l.nom_localidad,
+        p.nom_provincia,
+        pa.nom_pais,
+        s.habilitada
+    FROM 
+        sucursales s
+    JOIN 
+        localidades l ON s.nro_localidad = l.nro_localidad
+    JOIN 
+        provincias p ON l.cod_pais = p.cod_pais AND l.cod_provincia = p.cod_provincia
+    JOIN 
+        paises pa ON p.cod_pais = pa.cod_pais
+    JOIN 
+        supermercados sm ON s.nro_supermercado = sm.nro_supermercado
+    WHERE
+        s.nro_localidad = @nro_localidad
+        AND s.nro_supermercado IN (SELECT nro_supermercado FROM #SupermercadosSolicitados);
+END;
+
+select * from localidades -- 4
+select * from supermercados
+
+use indec
+
+exec obtener_sucursales_por_localidad @nro_localidad = 4 , @lista_supermercados = '[1,2,3,4]'
 
 select * from productos_supermercados
 
