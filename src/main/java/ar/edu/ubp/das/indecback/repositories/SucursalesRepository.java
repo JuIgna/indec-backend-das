@@ -51,6 +51,7 @@ public class SucursalesRepository {
                 try {
                         String supermercados = String.join(",", req.getLista_supermercados());
                         System.out.println("request de sucursales recibido " +supermercados );
+                        System.out.println("request de localidad recibido " + req.getNro_localidad());
 
                         SqlParameterSource params = new MapSqlParameterSource()
                                         .addValue("nro_localidad", req.getNro_localidad())

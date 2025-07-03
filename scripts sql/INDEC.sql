@@ -740,7 +740,7 @@ select * from supermercados
 
 use indec
 
-exec obtener_sucursales_por_localidad @nro_localidad = 4 , @lista_supermercados = '[1,2,3,4]'
+exec obtener_sucursales_por_localidad @nro_localidad = 4 , @lista_supermercados = '1,2,3,4'
 
 select * from productos_supermercados
 
