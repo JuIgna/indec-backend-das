@@ -4,9 +4,7 @@ public class LocalidadesRequest {
     private String cod_pais;
     private String cod_provincia;
 
-    public LocalidadesRequest () {
-
-    }
+    public LocalidadesRequest () {  }
 
     public String getCod_pais() {
         return cod_pais;

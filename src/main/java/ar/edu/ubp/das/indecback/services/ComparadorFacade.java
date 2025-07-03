@@ -1,7 +1,9 @@
 package ar.edu.ubp.das.indecback.services;
 
 import ar.edu.ubp.das.indecback.beans.*;
-import ar.edu.ubp.das.indecback.repositories.IndecRepository;
+import ar.edu.ubp.das.indecback.repositories.PreciosRepository;
+import ar.edu.ubp.das.indecback.repositories.ProductosRepository;
+import ar.edu.ubp.das.indecback.repositories.SucursalesRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -15,9 +17,12 @@ public class ComparadorFacade {
 
     @Autowired
     private SupermercadoServiceFactory supermercadoServiceFactory;
-
     @Autowired
-    private IndecRepository indecRepository;
+    private SucursalesRepository sucursalesRepository;
+    @Autowired
+    private PreciosRepository preciosRepository;
+    @Autowired
+    private ProductosRepository productosRepository;
 
     private Map<String, Object> config; // Configuracion cargada
 
@@ -36,7 +41,7 @@ public class ComparadorFacade {
     }
 
     public List<SupermercadoBean> obtenerSupermercados() {
-        return indecRepository.obtenerSupermercados();
+        return productosRepository.obtenerSupermercados();
     }
 
     public void actualizarInformacionOperacion(String tipoOperacion) throws Exception {
@@ -58,20 +63,20 @@ public class ComparadorFacade {
                 case "sucursales":
                         System.out.println("JSON de SUCURSALES " + supermercado.getRazon_social() + " De Servicio " + supermercado.getTipo_servicio());
                         System.out.println(jsonRespuesta);
-                        indecRepository.actualizarSucursal(jsonRespuesta, supermercado.getNro_supermercado());
+                        sucursalesRepository.actualizarSucursal(jsonRespuesta, supermercado.getNro_supermercado());
                         break;
 
                 case "productos":
                         System.out.println("JSON de PRODUCTOS " + supermercado.getRazon_social() + " De Servicio " + supermercado.getTipo_servicio());
                         System.out.println(jsonRespuesta);
-                        indecRepository.actualizarProductos(jsonRespuesta, supermercado.getNro_supermercado());
+                        productosRepository.actualizarProductos(jsonRespuesta, supermercado.getNro_supermercado());
                         break;
 
                 case "precios":
                         System.out.println("JSON de PRECIOS " + supermercado.getRazon_social() + " De Servicio " + supermercado.getTipo_servicio());
                         System.out.println(jsonRespuesta);
                     System.out.println("NRO_ " + supermercado.getNro_supermercado());
-                        indecRepository.actualizarPreciosProductos(jsonRespuesta, supermercado.getNro_supermercado());
+                        preciosRepository.actualizarPreciosProductos(jsonRespuesta, supermercado.getNro_supermercado());
                         break;
             }
         }
@@ -99,13 +104,13 @@ public class ComparadorFacade {
 
             switch (operacion) {
                 case "sucursales":
-                    indecRepository.actualizarSucursal(jsonRespuesta, supermercado.getNro_supermercado());
+                    sucursalesRepository.actualizarSucursal(jsonRespuesta, supermercado.getNro_supermercado());
                     break;
                 case "productos":
-                    indecRepository.actualizarProductos(jsonRespuesta, supermercado.getNro_supermercado());
+                    productosRepository.actualizarProductos(jsonRespuesta, supermercado.getNro_supermercado());
                     break;
                 case "precios":
-                    indecRepository.actualizarPreciosProductos(jsonRespuesta, supermercado.getNro_supermercado());
+                    preciosRepository.actualizarPreciosProductos(jsonRespuesta, supermercado.getNro_supermercado());
                     break;
             }
         }
