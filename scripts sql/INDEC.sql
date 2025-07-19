@@ -6,7 +6,7 @@
 -- INDICE DEL SCRIPT:
 -- 1: Eliminacion de Tablas (para vaciar la base de datos)
 -- 2: Creacion de Tablas
--- 3: Inserción de Datos
+-- 3: Inserciï¿½n de Datos
 -- 4: Procedimientos Almacenados (para consultar o actualizar informacion)
 
 drop database indec 
@@ -64,7 +64,7 @@ create table paises
 (
 	cod_pais varchar(10) not null,
 	nom_pais varchar(60) not null,
-	-- añadir el atributo local ??
+	-- aï¿½adir el atributo local ??
 	
 	constraint PK__paises primary key (cod_pais)
 
@@ -350,7 +350,7 @@ INSERT INTO paises (cod_pais, nom_pais) VALUES ('AR', 'Argentina');
 
 -- Insert into provincias
 INSERT INTO provincias (cod_pais, cod_provincia, nom_provincia) VALUES ('AR', 'BA', 'Buenos Aires');
-INSERT INTO provincias (cod_pais, cod_provincia, nom_provincia) VALUES ('AR', 'CBA', 'Córdoba');
+INSERT INTO provincias (cod_pais, cod_provincia, nom_provincia) VALUES ('AR', 'CBA', 'Cï¿½rdoba');
 INSERT INTO provincias (cod_pais, cod_provincia, nom_provincia) VALUES ('AR', 'SF', 'Santa Fe');
 
 -- Insert into localidades for Buenos Aires
@@ -358,10 +358,10 @@ INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('La Pla
 INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Mar del Plata', 'AR', 'BA');
 INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Tandil', 'AR', 'BA');
 
--- Insert into localidades for Córdoba
-INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Córdoba Capital', 'AR', 'CBA');
+-- Insert into localidades for Cï¿½rdoba
+INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Cï¿½rdoba Capital', 'AR', 'CBA');
 INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Villa Carlos Paz', 'AR', 'CBA');
-INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Río Cuarto', 'AR', 'CBA');
+INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Rï¿½o Cuarto', 'AR', 'CBA');
 
 -- Insert into localidades for Santa Fe
 INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Rosario', 'AR', 'SF');
@@ -369,13 +369,13 @@ INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Santa 
 INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Reconquista', 'AR', 'SF');
 
 
-INSERT INTO idiomas (cod_idioma, nom_idioma) VALUES ('es-AR', 'Español');
+INSERT INTO idiomas (cod_idioma, nom_idioma) VALUES ('es-AR', 'Espaï¿½ol');
 INSERT INTO idiomas (cod_idioma, nom_idioma) VALUES ('en', 'English');
 
 
 -- Rubros de productos 5
 INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Aceites', 's'); -- 1
-INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Lácteos', 's'); -- 2
+INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Lï¿½cteos', 's'); -- 2
 INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Alimentos Secos', 's'); --3
 INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Panificados', 's'); --4
 INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Limpieza', 's'); --5
@@ -385,12 +385,12 @@ INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Limpieza', 's'); --5
 --Categorias de productos  12
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Aceites de Cocina', 1, 's'); --1
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Vinagres de Cocina', 1, 's'); --2
-INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Leches y Derivados Lácteos', 2, 's'); --3
+INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Leches y Derivados Lï¿½cteos', 2, 's'); --3
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Harinas', 3, 's'); -- 4
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Panes de Molde', 4, 's'); --5
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Desinfectantes', 5, 's');--6
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Arroces', 3, 's'); --7
-INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Azúcar', 3, 's'); --8
+INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Azï¿½car', 3, 's'); --8
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Yerbas', 3, 's');--9
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Pastas', 3, 's');--10
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Ingrediente de Cocina', 3, 's'); --11
@@ -400,23 +400,23 @@ INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('In
 
 -- Tipos de productos 11 
 INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Aceite'); --1 
-INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Bebida Láctea'); --2
+INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Bebida Lï¿½ctea'); --2
 INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Ingrediente de Cocina'); --3
 INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Pan de Molde'); --4
 INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Desinfectante');--5
 INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Natural');--6
 INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Edulcorante Natural'); --7
-INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Infusión'); --8
+INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Infusiï¿½n'); --8
 INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Pasta'); --9
 INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Dulces'); -- 10
 INSERT INTO tipos_productos (nom_tipo_producto) VALUES ('Vinagres'); --11
 
 
--- Rubros de productos en inglés y español
+-- Rubros de productos en inglï¿½s y espaï¿½ol
 INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (1, 'en', 'Oils');
 INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (1, 'es-AR', 'Aceites');
 INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (2, 'en', 'Dairy');
-INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (2, 'es-AR', 'Lácteos');
+INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (2, 'es-AR', 'Lï¿½cteos');
 INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (3, 'en', 'Dry Foods');
 INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (3, 'es-AR', 'Alimentos Secos');
 INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (4, 'en', 'Baked Goods');
@@ -425,13 +425,13 @@ INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (5, '
 INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (5, 'es-AR', 'Limpieza');
 
 
--- Categorías de productos en inglés y español
+-- Categorï¿½as de productos en inglï¿½s y espaï¿½ol
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (1, 'en', 'Cooking Oils');
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (1, 'es-AR', 'Aceites de Cocina');
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (2, 'en', 'Cooking Vinegars');
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (2, 'es-AR', 'Vinagres de Cocina');
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (3, 'en', 'Milk and Dairy Products');
-INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (3, 'es-AR', 'Leches y Derivados Lácteos');
+INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (3, 'es-AR', 'Leches y Derivados Lï¿½cteos');
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (4, 'en', 'Flours');
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (4, 'es-AR', 'Harinas');
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (5, 'en', 'Sliced Bread');
@@ -441,7 +441,7 @@ INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) 
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (7, 'en', 'Rice');
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (7, 'es-AR', 'Arroces');
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (8, 'en', 'Sugar');
-INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (8, 'es-AR', 'Azúcar');
+INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (8, 'es-AR', 'Azï¿½car');
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (9, 'en', 'Yerba Mate');
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (9, 'es-AR', 'Yerbas');
 INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) VALUES (10, 'en', 'Pasta');
@@ -453,11 +453,11 @@ INSERT INTO idiomas_categorias_productos (nro_categoria, cod_idioma, categoria) 
 
 
 
--- Tipos de productos en inglés y español
+-- Tipos de productos en inglï¿½s y espaï¿½ol
 INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (1, 'en', 'Oil');
 INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (1, 'es-AR', 'Aceite');
 INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (2, 'en', 'Dairy Beverage');
-INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (2, 'es-AR', 'Bebida Láctea');
+INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (2, 'es-AR', 'Bebida Lï¿½ctea');
 INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (3, 'en', 'Cooking Ingredient');
 INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (3, 'es-AR', 'Ingrediente de Cocina');
 INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (4, 'en', 'Sliced Bread');
@@ -469,7 +469,7 @@ INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_product
 INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (7, 'en', 'Natural Sweetener');
 INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (7, 'es-AR', 'Edulcorante Natural');
 INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (8, 'en', 'Infusion');
-INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (8, 'es-AR', 'Infusión');
+INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (8, 'es-AR', 'Infusiï¿½n');
 INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (9, 'en', 'Pasta');
 INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (9, 'es-AR', 'Pasta');
 INSERT INTO idiomas_tipos_productos (nro_tipo_producto, cod_idioma, tipo_producto) VALUES (10, 'es-AR', 'Dulces');
@@ -501,7 +501,7 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Rubros de productos con fallback al español
+    -- Rubros de productos con fallback al espaï¿½ol
     SELECT 
         r.nro_rubro,
         COALESCE(ir.rubro, r.nom_rubro) AS nom_rubro
@@ -510,7 +510,7 @@ BEGIN
         ON r.nro_rubro = ir.nro_rubro 
         AND ir.cod_idioma = @cod_idioma;
 
-    -- Categorías de productos con fallback al español
+    -- Categorï¿½as de productos con fallback al espaï¿½ol
     SELECT 
         c.nro_categoria,
         c.nro_rubro,
@@ -520,7 +520,7 @@ BEGIN
         ON c.nro_categoria = ic.nro_categoria 
         AND ic.cod_idioma = @cod_idioma;
 
-    -- Tipos de productos con fallback al español
+    -- Tipos de productos con fallback al espaï¿½ol
     SELECT 
         t.nro_tipo_producto,
         COALESCE(it.tipo_producto, t.nom_tipo_producto) AS nom_tipo_producto
@@ -662,7 +662,7 @@ BEGIN
         s.servicios_disponibles,
         l.nom_localidad,  -- Nombre de la localidad
         p.nom_provincia,  -- Nombre de la provincia
-        pa.nom_pais,      -- Nombre del país
+        pa.nom_pais,      -- Nombre del paï¿½s
         s.habilitada
     FROM 
         sucursales s
@@ -748,41 +748,56 @@ select * from productos_supermercados
 -- PROCEDIMIENTOS DEL COMPARAR PRECIOS 
 CREATE OR ALTER PROCEDURE dbo.comparar_precios (
     @codigos_barras VARCHAR(MAX),
-    @nro_localidad INT   
+    @nro_localidad INT
 )
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Tabla temporal para almacenar los códigos de barra recibidos
+    -- Validar parÃ¡metros de entrada
+    IF @codigos_barras IS NULL OR @codigos_barras = '' OR @nro_localidad IS NULL
+    BEGIN
+        RAISERROR ('ParÃ¡metros invÃ¡lidos: codigos_barras o nro_localidad no pueden ser nulos o vacÃ­os.', 16, 1);
+        RETURN;
+    END;
+
+    -- Tabla temporal para almacenar los cÃ³digos de barra recibidos
     CREATE TABLE #ProductosSolicitados (
         cod_barra BIGINT
     );
 
-    -- Insertar los códigos de barra en la tabla temporal
+    -- Insertar los cÃ³digos de barra en la tabla temporal
     INSERT INTO #ProductosSolicitados (cod_barra)
-    SELECT DISTINCT TRY_CAST(value AS BIGINT) 
-    FROM STRING_SPLIT(@codigos_barras, ',') 
+    SELECT DISTINCT TRY_CAST(value AS BIGINT)
+    FROM STRING_SPLIT(@codigos_barras, ',')
     WHERE TRY_CAST(value AS BIGINT) IS NOT NULL;
 
-    -- Obtener el precio de cada producto en cada supermercado
-    SELECT DISTINCT
-        ps.cod_barra,
+    -- Obtener todos los supermercados en la localidad y el mejor precio de cada producto
+    SELECT 
+        p.cod_barra,
         p.nom_producto,
         p.imagen,
-        s.nro_supermercado,
+        sm.nro_supermercado,
         sm.razon_social,
-        ps.precio  as mejor_precio
-    FROM productos_supermercados ps
-    JOIN sucursales s ON ps.nro_supermercado = s.nro_supermercado AND ps.nro_sucursal = s.nro_sucursal
-    JOIN supermercados sm ON s.nro_supermercado = sm.nro_supermercado
-    JOIN productos p ON ps.cod_barra = p.cod_barra
-    WHERE ps.cod_barra IN (SELECT cod_barra FROM #ProductosSolicitados)
-      AND s.nro_localidad = @nro_localidad
-    ORDER BY ps.cod_barra, s.nro_supermercado;
-
-
+        COALESCE(MIN(ps.precio), 0) AS mejor_precio
+    FROM supermercados sm
+    JOIN sucursales s ON sm.nro_supermercado = s.nro_supermercado
+    CROSS JOIN productos p
+    LEFT JOIN productos_supermercados ps ON p.cod_barra = ps.cod_barra 
+        AND ps.nro_supermercado = s.nro_supermercado 
+        AND ps.nro_sucursal = s.nro_sucursal
+    WHERE p.cod_barra IN (SELECT cod_barra FROM #ProductosSolicitados)
+        AND s.nro_localidad = @nro_localidad
+    GROUP BY 
+        p.cod_barra,
+        p.nom_producto,
+        p.imagen,
+        sm.nro_supermercado,
+        sm.razon_social
+    ORDER BY p.cod_barra, sm.nro_supermercado;
 END;
+
+exec dbo.comparar_precios @codigos_barras = '1,10', @nro_localidad = 2
 
 
 
@@ -937,7 +952,7 @@ BEGIN
     FROM #TempProductos t
     INNER JOIN rubros_productos r ON t.nom_rubro = r.nom_rubro;
 
-    -- Mapear Categorías
+    -- Mapear Categorï¿½as
     UPDATE t
     SET nro_categoria = c.nro_categoria
     FROM #TempProductos t
@@ -951,7 +966,7 @@ BEGIN
 	WHERE m.nom_marca IS NULL;
 
 
-	-- Mapear Marcas (después de insertar nuevas)
+	-- Mapear Marcas (despuï¿½s de insertar nuevas)
 	UPDATE t
 	SET nro_marca = m.nro_marca
 	FROM #TempProductos t
@@ -1044,7 +1059,7 @@ BEGIN
         vigente VARCHAR(1)
     );
 
-    -- Actualizar solo si el producto está vigente ('s')
+    -- Actualizar solo si el producto estï¿½ vigente ('s')
     UPDATE ps
     SET 
         ps.precio = tp.precio,
@@ -1056,7 +1071,7 @@ BEGIN
         AND ps.cod_barra  = tp.cod_barra
     WHERE tp.vigente = 's';
 
-    -- Insertar nuevos registros solo si están vigentes ('s')
+    -- Insertar nuevos registros solo si estï¿½n vigentes ('s')
     INSERT INTO productos_supermercados (nro_supermercado, nro_sucursal, cod_barra, precio, fecha_ult_actualizacion)
     SELECT tp.nro_supermercado, tp.nro_sucursal, tp.cod_barra, tp.precio, GETDATE()
     FROM #TempPrecios tp
