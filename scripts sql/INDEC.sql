@@ -1082,6 +1082,14 @@ BEGIN
         AND ps.cod_barra = tp.cod_barra
     );
 
+
+    delete ps  FROM productos_supermercados ps
+		    JOIN #TempPrecios tp
+            ON ps.nro_supermercado = tp.nro_supermercado
+        AND ps.nro_sucursal = tp.nro_sucursal
+        AND ps.cod_barra  = tp.cod_barra
+        WHERE tp.vigente = 'n'
+
 END;
 GO
 
