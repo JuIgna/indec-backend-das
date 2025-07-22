@@ -1,20 +1,29 @@
 package ar.edu.ubp.das.supermercadorest.beans;
 
 public class PrecioProductoBean {
-    private int nro_sucursal;
+   // private int nro_sucursal;
+    private String nom_sucursal;
     private String cod_barra;
     private String vigente;
     private float precio;
 
     public PrecioProductoBean () {}
 
-    public int getNro_sucursal() {
-        return nro_sucursal;
+    // public int getNro_sucursal() {
+    //     return nro_sucursal;
+    // }
+
+    public void setNom_sucursal (String nom_sucursal){
+        this.nom_sucursal = nom_sucursal;
     }
 
-    public void setNro_sucursal(int nro_sucursal) {
-        this.nro_sucursal = nro_sucursal;
+    public String getNom_sucursal () {
+        return nom_sucursal;
     }
+
+    // public void setNro_sucursal(int nro_sucursal) {
+    //     this.nro_sucursal = nro_sucursal;
+    // }
 
     public String getCod_barra() {
         return cod_barra;

@@ -265,6 +265,7 @@ INSERT INTO paises (cod_pais, nom_pais) VALUES ('AR', 'Argentina');
 -- Insert into provincias
 INSERT INTO provincias (cod_pais, cod_provincia, nom_provincia) VALUES ('AR', 'BA', 'Buenos Aires');
 INSERT INTO provincias (cod_pais, cod_provincia, nom_provincia) VALUES ('AR', 'CBA', 'Córdoba');
+INSERT INTO provincias (cod_pais, cod_provincia, nom_provincia) VALUES ('AR', 'SF', 'Santa Fe');
 
 -- Insert into localidades for Buenos Aires
 INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('La Plata', 'AR', 'BA');
@@ -283,67 +284,60 @@ INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Reconq
 
 
 -- Insert into sucursales (with multiple branches per locality)
+--1 la plata
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour La Plata Este', 'Savio', '345', '221-1234567', '-34.92145', '-57.95453', 1, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour La Plata Sur', 'General Paz', '456', '221-2345678', '-34.92234', '-57.95532', 1, 's');
 
+--2 mar del plata
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Mar del Plata Centro', 'España', '345', '221-1234567', '-34.92145', '-57.95453', 2, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Mar del Plata Sur', 'Messi', '456', '221-2345678', '-34.92234', '-57.95532', 2, 's');
 
+--3 tandil
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Tandil Centro', 'Acuña', '345', '221-1234567', '-34.92145', '-57.95453', 3, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Tandil Sur', 'Leopoldo Lugones', '456', '221-2345678', '-34.92234', '-57.95532', 3, 's');
 
+--4 cordoba
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Córdoba Centro', 'Olmos', '876', '351-5554321', '-31.42008', '-64.18877', 4, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Córdoba Norte', 'San Luis', '789', '351-5551234', '-31.4250', '-64.1950', 4, 's');
 
+--5 carlos paz
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Villa Carlos Paz Centro', 'Felipe Nuñez', '345', '221-1234567', '-34.92145', '-57.95453', 5, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Villa Carlos Paz Sur', 'Sarmiento', '456', '221-2345678', '-34.92234', '-57.95532', 5, 's');
 
+--6 rio cuarto
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Rio Cuarto Centro', 'Vekez Sarfield', '345', '221-1234567', '-34.92145', '-57.95453', 6, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Rio Cuarto Sur', 'Yrigoyen', '456', '221-2345678', '-34.92234', '-57.95532', 6, 's');
 
+--7 rosario
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Rosario Centro', 'Vekez Sarfield', '345', '221-1234567', '-34.92145', '-57.95453', 7, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Rosario Sur', 'Yrigoyen', '456', '221-2345678', '-34.92234', '-57.95532', 7, 's');
 
+--8 santa fe
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Santa Fe Centro', 'Vekez Sarfield', '345', '221-1234567', '-34.92145', '-57.95453', 8, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Santa Fe Sur', 'Yrigoyen', '456', '221-2345678', '-34.92234', '-57.95532', 8, 's');
 
+--9 reconquista
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Reconquista Centro', 'Velez Sarfield', '345', '221-1234567', '-34.92145', '-57.95453', 9, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Carrefour Reconquista Sur', 'Yrigoyen', '456', '221-2345678', '-34.92234', '-57.95532', 9, 's');
 
--- Rosario - Santa Fe - Reconquista
-
-INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Carrefour Rosario Centro', 'Calle 12', '345', '221-1234567', '-34.92145', '-57.95453', 7, 's');
-INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Carrefour Rosario Sur', 'Calle 13', '456', '221-2345678', '-34.92234', '-57.95532', 7, 's');
-
-INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Carrefour Santa Fe Capital Centro', 'Calle 12', '345', '221-1234567', '-34.92145', '-57.95453', 8, 's');
-INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Carrefour Santa Fe Capital Sur', 'Calle 13', '456', '221-2345678', '-34.92234', '-57.95532', 8, 's');
-
-INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Carrefour Reconquista 1', 'Calle 12', '345', '221-1234567', '-34.92145', '-57.95453', 9, 's');
-INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Carrefour Reconquista 2', 'Calle 13', '456', '221-2345678', '-34.92234', '-57.95532', 9, 's');
 
 select * from localidades
 order by nro_localidad asc
@@ -466,6 +460,12 @@ INSERT INTO tipos_servicios_sucursales (nro_sucursal, nro_tipo_servicio, vigente
 INSERT INTO tipos_servicios_sucursales (nro_sucursal, nro_tipo_servicio, vigente) VALUES (10, 3, 's');
 INSERT INTO tipos_servicios_sucursales (nro_sucursal, nro_tipo_servicio, vigente) VALUES (11, 1, 's');
 INSERT INTO tipos_servicios_sucursales (nro_sucursal, nro_tipo_servicio, vigente) VALUES (12, 1, 's');
+INSERT INTO tipos_servicios_sucursales (nro_sucursal, nro_tipo_servicio, vigente) VALUES (13, 3, 's');
+INSERT INTO tipos_servicios_sucursales (nro_sucursal, nro_tipo_servicio, vigente) VALUES (14, 3, 's');
+INSERT INTO tipos_servicios_sucursales (nro_sucursal, nro_tipo_servicio, vigente) VALUES (15, 2, 's');
+INSERT INTO tipos_servicios_sucursales (nro_sucursal, nro_tipo_servicio, vigente) VALUES (16, 2, 's');
+INSERT INTO tipos_servicios_sucursales (nro_sucursal, nro_tipo_servicio, vigente) VALUES (17, 3, 's');
+INSERT INTO tipos_servicios_sucursales (nro_sucursal, nro_tipo_servicio, vigente) VALUES (18, 1, 's');
 
 
 -- Rubros de productos 5
@@ -685,7 +685,7 @@ INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALU
 INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (13, '5', 1220.00, 's');
 INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (14, '5', 1220.00, 's');
 INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (15, '5', 1220.00, 's');
-INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (17, '5', 1220.00, 's');
+INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (16, '5', 1220.00, 's');
 INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (17, '5', 1220.00, 's');
 INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (18, '5', 1220.00, 's');
 
@@ -709,7 +709,8 @@ INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALU
 INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (17, '6', 1799.00, 's');
 INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (18, '6', 1799.00, 's');
 
-
+select * from productos_sucursales
+go
 
 --7
 INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (1, '7', 1200.00, 's');
@@ -791,6 +792,7 @@ INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALU
 INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (14, '10', 2610.00, 's');
 INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (15, '10', 2610.00, 's');
 INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (16, '10', 2610.00, 's');
+INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (17, '10', 2624.00, 's');
 INSERT INTO productos_sucursales (nro_sucursal, cod_barra, precio, vigente) VALUES (18, '10', 2610.00, 's');
 
 --11
@@ -952,7 +954,8 @@ CREATE OR ALTER PROCEDURE dbo.obtener_informacion_productos_completa
 AS
 BEGIN
     SELECT 
-        ps.nro_sucursal,
+       -- ps.nro_sucursal,
+		s.nom_sucursal,
         p.cod_barra,
         p.nom_producto,
         p.desc_producto,
@@ -972,6 +975,7 @@ BEGIN
     JOIN tipos_productos_marcas tpm ON p.nro_marca = tpm.nro_marca 
         AND p.nro_tipo_producto = tpm.nro_tipo_producto
     JOIN productos_sucursales ps ON p.cod_barra = ps.cod_barra
+	JOIN sucursales s ON s.nro_sucursal = ps.nro_sucursal
     WHERE 
         p.vigente = 's' AND ps.vigente = 's'
     ORDER BY 
@@ -979,6 +983,7 @@ BEGIN
 END;
 GO
 exec dbo.obtener_informacion_productos_completa
+select * from sucursales
 
 
 -- Procedimiento almacenado para obtener los precios de los productos en sus distintas sucursales
@@ -986,7 +991,8 @@ CREATE OR ALTER PROCEDURE dbo.obtener_precios_productos
 AS
 BEGIN
     SELECT 
-        s.nro_sucursal,
+        --s.nro_sucursal,
+		s.nom_sucursal,
         p.cod_barra,
         ps.precio,
         ps.vigente
@@ -998,7 +1004,6 @@ BEGIN
         s.nro_sucursal, p.cod_barra;
 END;
 GO
-exec obtener_precios_productos
 
 -- OTRAS YERBAS
 

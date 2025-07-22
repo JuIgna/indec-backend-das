@@ -281,54 +281,63 @@ INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Santa 
 INSERT INTO localidades (nom_localidad, cod_pais, cod_provincia) VALUES ('Reconquista', 'AR', 'SF');
 
 -- Insert into sucursales (with multiple branches per locality)
+--1: La Plata
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Disco La Plata Centro', 'Felipe Varela', '345', '221-1234567', '-34.92145', '-57.95453', 1, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Disco La Plata Sur', 'Libertad', '456', '221-2345678', '-34.92234', '-57.95532', 1, 's');
 
+--2: Mar del Plata
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Disco Mar del Plata Centro', 'Yrigoyen', '345', '221-1234567', '-34.92145', '-57.95453', 2, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Disco Mar del Plata Sur', 'Calle 13', '456', '221-2345678', '-34.92234', '-57.95532', 2, 's');
 
+--3: Tandil
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Tandil Centro', 'Calle 12', '345', '221-1234567', '-34.92145', '-57.95453', 3, 's');
+VALUES ('Disco Tandil Centro', 'Av. Velez Sarfield', '345', '221-1234567', '-34.92145', '-57.95453', 3, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Tandil Sur', 'Calle 13', '456', '221-2345678', '-34.92234', '-57.95532', 3, 's');
+VALUES ('Disco Tandil Sur', 'Octavio Pinto', '456', '221-2345678', '-34.92234', '-57.95532', 3, 's');
 
+--4: Cordoba
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
 VALUES ('Disco Sucursal Córdoba Centro', 'Av. Colón', '876', '351-5554321', '-31.42008', '-64.18877', 4, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Sucursal Córdoba Norte', 'Calle Mayor', '789', '351-5551234', '-31.4250', '-64.1950', 4, 's');
+VALUES ('Disco Sucursal Córdoba Norte', 'Av. General Paz', '789', '351-5551234', '-31.4250', '-64.1950', 4, 's');
 
+--5: Carlos Paz
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Sucursal Villa Carlos Paz Centro', 'Calle 12', '345', '221-1234567', '-34.92145', '-57.95453', 5, 's');
+VALUES ('Disco Sucursal Villa Carlos Paz Centro', 'Libertad', '345', '221-1234567', '-34.92145', '-57.95453', 5, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Sucursal Villa Carlos Paz Sur', 'Calle 13', '456', '221-2345678', '-34.92234', '-57.95532', 5, 's');
+VALUES ('Disco Sucursal Villa Carlos Paz Sur', 'Sarmiento', '456', '221-2345678', '-34.92234', '-57.95532', 5, 's');
 
+--6: Rio Cuarto 
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Sucursal Rio Cuarto Centro', 'Calle 12', '345', '221-1234567', '-34.92145', '-57.95453', 6, 's');
+VALUES ('Disco Sucursal Rio Cuarto Centro', 'Alberdi', '345', '221-1234567', '-34.92145', '-57.95453', 6, 's');
 INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Sucursal Rio Cuarto Sur', 'Calle 13', '456', '221-2345678', '-34.92234', '-57.95532', 6, 's');
+VALUES ('Disco Sucursal Rio Cuarto Sur', 'La Pampa', '456', '221-2345678', '-34.92234', '-57.95532', 6, 's');
+
+--7: Rosario
+INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
+VALUES ('Disco Rosario Centro', 'Santa Rosa', '345', '221-1234567', '-34.92145', '-57.95453', 7, 's');
+INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
+VALUES ('Disco Rosario Sur', 'Belgrano', '456', '221-2345678', '-34.92234', '-57.95532', 7, 's');
+
+--8: Santa fe captial
+INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
+VALUES ('Disco Santa Fe Capital Centro', 'Savio', '345', '221-1234567', '-34.92145', '-57.95453', 8, 's');
+INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
+VALUES ('Disco Santa Fe Capital Sur', 'Paraguay', '456', '221-2345678', '-34.92234', '-57.95532', 8, 's');
+
+-- 9: Reconquista
+INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
+VALUES ('Disco Reconquista 1', 'San Juan', '345', '221-1234567', '-34.92145', '-57.95453', 9, 's');
+INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
+VALUES ('Disco Reconquista 2', 'Uruguay', '456', '221-2345678', '-34.92234', '-57.95532', 9, 's');
 
 select * from localidades
 
--- para 7,8,9
 
-INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Rosario 1', 'Calle 12', '345', '221-1234567', '-34.92145', '-57.95453', 7, 's');
-INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Rosario 2', 'Calle 13', '456', '221-2345678', '-34.92234', '-57.95532', 7, 's');
-
-INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Santa Fe Capital 1', 'Calle 12', '345', '221-1234567', '-34.92145', '-57.95453', 8, 's');
-INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Santa Fe Capital 2', 'Calle 13', '456', '221-2345678', '-34.92234', '-57.95532', 8, 's');
-
-INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Reconquista 1', 'Calle 12', '345', '221-1234567', '-34.92145', '-57.95453', 9, 's');
-INSERT INTO sucursales (nom_sucursal, calle, nro_calle, telefonos, coord_latitud, coord_longitud, nro_localidad, habilitada)
-VALUES ('Disco Reconquista 2', 'Calle 13', '456', '221-2345678', '-34.92234', '-57.95532', 9, 's');
 
 -- Insertar horarios para todos los dias en todas las sucursales
 INSERT INTO horarios_sucursales (nro_sucursal, dia_semana, hora_desde, hora_hasta)
@@ -427,6 +436,8 @@ VALUES (18, 'Lunes', '09:00', '22:00'), (18, 'Martes', '09:00', '22:00'), (18, '
 INSERT INTO tipos_servicios_supermercado (nom_tipo_servicio) VALUES ('Delivery');
 INSERT INTO tipos_servicios_supermercado (nom_tipo_servicio) VALUES ('Retiro en tienda');
 INSERT INTO tipos_servicios_supermercado (nom_tipo_servicio) VALUES ('AutoServicio');
+
+select * from categorias_productos
 
 
 -- Assign services to all branches
@@ -946,7 +957,8 @@ CREATE OR ALTER PROCEDURE dbo.obtener_informacion_productos_completa
 AS
 BEGIN
     SELECT 
-        ps.nro_sucursal,
+        -- ps.nro_sucursal,
+		s.nom_sucursal,
         p.cod_barra,
         p.nom_producto,
         p.desc_producto,
@@ -966,6 +978,7 @@ BEGIN
     JOIN tipos_productos_marcas tpm ON p.nro_marca = tpm.nro_marca 
         AND p.nro_tipo_producto = tpm.nro_tipo_producto
     JOIN productos_sucursales ps ON p.cod_barra = ps.cod_barra
+	JOIN sucursales s ON s.nro_sucursal = ps.nro_sucursal
     WHERE 
         p.vigente = 's' AND ps.vigente = 's'
     ORDER BY 
@@ -973,6 +986,7 @@ BEGIN
 END;
 GO
 exec dbo.obtener_informacion_productos_completa
+select * from sucursales
 
 
 -- Procedimiento almacenado para obtener los precios de los productos en sus distintas sucursales
@@ -980,7 +994,8 @@ CREATE OR ALTER PROCEDURE dbo.obtener_precios_productos
 AS
 BEGIN
     SELECT 
-        s.nro_sucursal,
+        -- s.nro_sucursal,
+		s.nom_sucursal,
         p.cod_barra,
         ps.precio,
         ps.vigente

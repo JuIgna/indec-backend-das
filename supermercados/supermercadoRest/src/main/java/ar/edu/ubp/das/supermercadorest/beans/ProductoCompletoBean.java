@@ -11,7 +11,8 @@ public class ProductoCompletoBean {
     private String nom_tipo_producto;
     private String tipo_producto_marca_vigente;
     private String producto_vigente;
-    private int nro_sucursal;
+   // private int nro_sucursal;
+    private String nom_sucursal;
 
     public ProductoCompletoBean () {}
 
@@ -21,6 +22,14 @@ public class ProductoCompletoBean {
 
     public void setCod_barra(String cod_barra) {
         this.cod_barra = cod_barra;
+    }
+
+    public String getNom_sucursal(){
+        return nom_sucursal;
+    }
+
+    public void setNom_sucursal (String nom_sucursal){
+        this.nom_sucursal = nom_sucursal;
     }
 
     public String getNom_producto() {
@@ -95,11 +104,11 @@ public class ProductoCompletoBean {
         this.producto_vigente = producto_vigente;
     }
 
-    public int getNro_sucursal() {
-        return nro_sucursal;
-    }
+    // public int getNro_sucursal() {
+    //     return nro_sucursal;
+    // }
 
-    public void setNro_sucursal(int nro_sucursal) {
-        this.nro_sucursal = nro_sucursal;
-    }
+    // public void setNro_sucursal(int nro_sucursal) {
+    //     this.nro_sucursal = nro_sucursal;
+    // }
 }
