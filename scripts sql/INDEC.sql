@@ -808,8 +808,82 @@ BEGIN
     ORDER BY p.cod_barra, sm.nro_supermercado;
 END;
 
-exec dbo.comparar_precios @codigos_barras = '1,10', @nro_localidad = 2
+-- nuevo sp
+CREATE OR ALTER PROCEDURE dbo.comparar_precios (
+    @codigos_barras VARCHAR(MAX),
+    @nro_localidad INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
 
+    -- Validar parámetros de entrada
+    IF @codigos_barras IS NULL OR @codigos_barras = '' OR @nro_localidad IS NULL
+    BEGIN
+        RAISERROR ('Parámetros inválidos: codigos_barras o nro_localidad no pueden ser nulos o vacíos.', 16, 1);
+        RETURN;
+    END;
+
+    -- Tabla temporal para almacenar los códigos de barra recibidos
+    CREATE TABLE #ProductosSolicitados (
+        cod_barra BIGINT
+    );
+
+    -- Insertar los códigos de barra en la tabla temporal
+    INSERT INTO #ProductosSolicitados (cod_barra)
+    SELECT DISTINCT TRY_CAST(value AS BIGINT)
+    FROM STRING_SPLIT(@codigos_barras, ',')
+    WHERE TRY_CAST(value AS BIGINT) IS NOT NULL;
+
+    -- Obtener todos los supermercados en la localidad y el mejor precio de cada producto
+    SELECT 
+        p.cod_barra,
+        p.nom_producto,
+        p.imagen,
+        sm.nro_supermercado,
+        sm.razon_social,
+        COALESCE(MIN(ps.precio), 0) AS mejor_precio,
+        CASE 
+            WHEN COUNT(ps.cod_barra) = 0 THEN 1 
+            ELSE 0 
+        END AS sin_stock,  -- No hay producto en ninguna sucursal
+        CASE 
+            WHEN COUNT(ps.cod_barra) > 0 AND COUNT(ps.precio) = 0 THEN 1 
+            ELSE 0 
+        END AS sin_precio,  -- Hay producto pero no tiene precio
+		CASE 
+			WHEN COUNT(ps.cod_barra) > 0 
+				 AND COUNT(CASE WHEN CAST(ps.fecha_ult_actualizacion AS DATE) = CAST(GETDATE() AS DATE) THEN 1 END) = 0 
+			THEN 1 
+			ELSE 0 
+		END AS sin_precio_actual
+    FROM supermercados sm
+    JOIN sucursales s ON sm.nro_supermercado = s.nro_supermercado
+    CROSS JOIN productos p
+    LEFT JOIN productos_supermercados ps ON p.cod_barra = ps.cod_barra 
+        AND ps.nro_supermercado = s.nro_supermercado 
+        AND ps.nro_sucursal = s.nro_sucursal
+    WHERE p.cod_barra IN (SELECT cod_barra FROM #ProductosSolicitados)
+        AND s.nro_localidad = @nro_localidad
+    GROUP BY 
+        p.cod_barra,
+        p.nom_producto,
+        p.imagen,
+        sm.nro_supermercado,
+        sm.razon_social
+    ORDER BY p.cod_barra, sm.nro_supermercado;
+END;
+
+exec dbo.comparar_precios @codigos_barras = '1,10', @nro_localidad = 2
+select * from productos_supermercados
+
+
+update productos_supermercados
+set 
+fecha_ult_actualizacion = '2025-07-22 21:20' 
+
+
+select * from productos_supermercados
 
 
 -- LOS 3 PROCEDIMIENTOS DE ACTUALIZACION DE INFORMACION BATCH:

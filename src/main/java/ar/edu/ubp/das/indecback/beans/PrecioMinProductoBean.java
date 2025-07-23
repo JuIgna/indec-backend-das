@@ -7,9 +7,37 @@ public class PrecioMinProductoBean {
     private String razon_social;
     private int nro_supermercado;
     private float mejor_precio;
-    private String vigente;
+    private int sin_precio;
+    private int sin_stock;
+    private int sin_precio_actual;
+
+    // private String vigente;
 
     public PrecioMinProductoBean() {}
+
+    public void setSin_precio(int sin_precio){
+        this.sin_precio = sin_precio;
+    }
+
+    public int getSin_precio (){
+        return sin_precio;
+    }
+
+    public void setSin_stock (int sin_stock){
+        this.sin_stock = sin_stock;
+    }
+
+    public int getSin_stock (){
+        return sin_stock;
+    }
+
+    public void setSin_precio_actual (int sin_precio_actual){
+        this.sin_precio_actual = sin_precio_actual;
+    }
+
+    public int getSin_precio_actual (){
+        return sin_precio_actual;
+    }
 
     public String getCod_barra() {
         return cod_barra;
@@ -59,11 +87,11 @@ public class PrecioMinProductoBean {
         this.razon_social = razon_social;
     }
 
-    public String getVigente() {
-        return vigente;
-    }
+    // public String getVigente() {
+    //     return vigente;
+    // }
 
-    public void setVigente(String vigente) {
-        this.vigente = vigente;
-    }
+    // public void setVigente(String vigente) {
+    //     this.vigente = vigente;
+    // }
 }
