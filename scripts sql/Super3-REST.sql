@@ -473,6 +473,7 @@ INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Lácteos', 's'); -- 2
 INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Alimentos Secos', 's'); --3
 INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Panificados', 's'); --4
 INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Limpieza', 's'); --5
+INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Azucares' , 's'); -- 6
 
 
  
@@ -484,7 +485,7 @@ INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Ha
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Panes de Molde', 4, 's'); --5
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Desinfectantes', 5, 's');--6
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Arroces', 3, 's'); --7
-INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Azúcar', 3, 's'); --8
+INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Azúcar', 6, 's'); --8
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Yerbas', 3, 's');--9
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Pastas', 3, 's');--10
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Ingrediente de Cocina', 3, 's'); --11
@@ -555,34 +556,33 @@ select * from marcas_productos
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
 VALUES ('1', 'Aceite de Girasol', 'Aceite para cocina', 1, 'https://carrefourar.vtexassets.com/arquivos/ids/263188/7798316700808_02.jpg?v=638042211872630000', 7, 1, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('2', 'Leche Entera', 'Leche de vaca', 2, 'https://f2h.shop/media/catalog/product/cache/93d5117b0af277427072d0e205016731/i/m/imageedit_1_4837957539.png', 2, 2, 's');
+VALUES ('2', 'Leche Entera', 'Leche de vaca', 3, 'https://masonlineprod.vtexassets.com/arquivos/ids/283731/Leche-La-Serenisima-Larga-Vida-Cl-sica-1-L-2-43469.jpg?v=638736082887300000', 2, 2, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('3', 'Harina de Trigo', 'Harina común', 3, 'https://pureza.com.ar/wp-content/uploads/2019/06/3D_PZA-HNA-ULTRA-REF_000_FTE-web.png', 6, 3, 's');
+VALUES ('3', 'Harina de Trigo', 'Harina común', 4, 'https://pureza.com.ar/wp-content/uploads/2019/06/3D_PZA-HNA-ULTRA-REF_000_FTE-web.png', 6, 3, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
 VALUES ('4', 'Pan Lactal', 'Pan de molde', 4, 'https://www.casa-segal.com/wp-content/uploads/2020/03/pan-blanco-fargo-320g-panificados-casa-segal-mendoza-600x600.jpg', 4, 4, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('5', 'Lavandina', 'Desinfectante', 5, 'https://www.multifood.com.ar/images/000Z-009-001-02124992Z-009-001-021-AyudinMaximaPureza.jpg', 5, 5, 's');
+VALUES ('5', 'Lavandina', 'Desinfectante', 6, 'https://www.multifood.com.ar/images/000Z-009-001-02124992Z-009-001-021-AyudinMaximaPureza.jpg', 5, 5, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('6', 'Arroz Largo Fino', 'Arroz blanco', 6, 'https://almacenfamily.com/productos/arroz-lucchetti-largofino-1kg.png', 8, 6, 's');
+VALUES ('6', 'Arroz Largo Fino', 'Arroz blanco', 7, 'https://almacenfamily.com/productos/arroz-lucchetti-largofino-1kg.png', 8, 6, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('7', 'Azúcar Blanca', 'Azúcar refinada', 7, 'https://laprovedeampip.com.ar/wp-content/uploads/2024/07/Azucar-arcor.png', 1, 7, 's');
+VALUES ('7', 'Azúcar Blanca', 'Azúcar refinada', 8, 'https://laprovedeampip.com.ar/wp-content/uploads/2024/07/Azucar-arcor.png', 1, 7, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('8', 'Yerba Mate', 'Yerba clásica', 8, 'https://shop.gustoargentino.com/cdn/shop/files/Yerba-Mate-Hierbas-Serranas-500g-Cbse.png?v=1682612325&width=480', 9, 8, 's');
+VALUES ('8', 'Yerba Mate', 'Yerba clásica', 9, 'https://shop.gustoargentino.com/cdn/shop/files/Yerba-Mate-Hierbas-Serranas-500g-Cbse.png?v=1682612325&width=480', 9, 8, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('9', 'Fideos Spaghetti', 'Fideos largos', 3, 'https://arcorencasa.com/wp-content/uploads/2024/10/20241008-13478.webp', 1, 9, 's');
-
+VALUES ('9', 'Fideos Spaghetti', 'Fideos largos', 4, 'https://arcorencasa.com/wp-content/uploads/2024/10/20241008-13478.webp', 1, 9, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('10', 'Manteca', 'Manteca cremosa', 2, 'https://latiendadelceliaco.com.ar/wp-content/uploads/2021/11/MANTECA-X200G-LA-SERENISIMA.jpg', 2, 6, 's');
+VALUES ('10', 'Manteca', 'Manteca cremosa', 3, 'https://latiendadelceliaco.com.ar/wp-content/uploads/2021/11/MANTECA-X200G-LA-SERENISIMA.jpg', 2, 6, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('11', 'Yogur Frutilla 900G', 'Yogur saborizado', 2, 'https://d1on8qs0xdu5jz.cloudfront.net/webapp/images/productos/b/0000012000/12051.jpg', 2, 2, 's');
+VALUES ('11', 'Yogur Frutilla 900G', 'Yogur saborizado', 3, 'https://d1on8qs0xdu5jz.cloudfront.net/webapp/images/productos/b/0000012000/12051.jpg', 2, 2, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('12', 'Sal Fina', 'Sal de mesa', 10, 'https://ardiaprod.vtexassets.com/arquivos/ids/309071/Sal-Fina-en-Paquete-Celusal-500-Gr-_1.jpg?v=638599351982970000', 10, 3, 's');
+VALUES ('12', 'Sal Fina', 'Sal de mesa', 11, 'https://ardiaprod.vtexassets.com/arquivos/ids/309071/Sal-Fina-en-Paquete-Celusal-500-Gr-_1.jpg?v=638599351982970000', 10, 3, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('13', 'Café Instantáneo', 'Café soluble', 11, 'https://acdn-us.mitiendanube.com/stores/004/008/770/products/nescafe-tradicion-100-cafe-puro-0ebfdaa843a17af86517095739313770-1024-1024.webp', 11, 8, 's');
+VALUES ('13', 'Café Instantáneo', 'Café soluble', 12, 'https://static.cotodigital3.com.ar/sitios/fotos/large/00574300/00574317.jpg', 11, 8, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('14', 'Vinagre', 'Vinagre de manzana', 12, 'https://golozinalujan.com/wp-content/uploads/2023/01/Diseno-sin-titulo-36-6.png', 3, 3, 's');
+VALUES ('14', 'Vinagre', 'Vinagre de manzana', 2, 'https://golozinalujan.com/wp-content/uploads/2023/01/Diseno-sin-titulo-36-6.png', 3, 3, 's');
 INSERT INTO productos (cod_barra, nom_producto, desc_producto, nro_categoria, imagen, nro_marca, nro_tipo_producto, vigente)
-VALUES ('15', 'Dulce de Leche', 'Dulce clasico', 2, 'https://delimart.com.ar/user-content/c464ce30-3883-4f05-a6db-148ab262c0e4.png', 12, 11, 's');
+VALUES ('15', 'Dulce de Leche', 'Dulce clasico', 3, 'https://delimart.com.ar/user-content/c464ce30-3883-4f05-a6db-148ab262c0e4.png', 2, 10, 's');
 
 
 

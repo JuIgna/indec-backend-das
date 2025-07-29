@@ -294,6 +294,7 @@ create table productos_supermercados
 )
 go
 
+
 ALTER TABLE productos_supermercados
 alter COLUMN fecha_ult_actualizacion smalldatetime NULL;
 
@@ -385,8 +386,8 @@ INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Lácteos', 's'); -- 2
 INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Alimentos Secos', 's'); --3
 INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Panificados', 's'); --4
 INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Limpieza', 's'); --5
+INSERT INTO rubros_productos (nom_rubro, vigente) VALUES ('Azucares' , 's'); -- 6
 
-select * from categorias_productos
 
 
 --Categorias de productos  12
@@ -397,7 +398,7 @@ INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Ha
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Panes de Molde', 4, 's'); --5
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Desinfectantes', 5, 's');--6
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Arroces', 3, 's'); --7
-INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Azúcar', 3, 's'); --8
+INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Azúcar', 6, 's'); --8
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Yerbas', 3, 's');--9
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Pastas', 3, 's');--10
 INSERT INTO categorias_productos (nom_categoria, nro_rubro, vigente) VALUES ('Ingrediente de Cocina', 3, 's'); --11
@@ -430,6 +431,8 @@ INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (4, '
 INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (4, 'es-AR', 'Panificados');
 INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (5, 'en', 'Cleaning');
 INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (5, 'es-AR', 'Limpieza');
+INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (6, 'es-AR', 'Azucares');
+INSERT INTO idiomas_rubros_productos (nro_rubro, cod_idioma, rubro) VALUES (6, 'en', 'Sugars');
 
 
 -- Categor�as de productos en ingl�s y espa�ol
@@ -875,15 +878,8 @@ BEGIN
 END;
 
 exec dbo.comparar_precios @codigos_barras = '1,10', @nro_localidad = 2
-select * from productos_supermercados
 
 
-update productos_supermercados
-set 
-fecha_ult_actualizacion = '2025-07-22 21:20' 
-
-
-select * from productos_supermercados
 
 
 -- LOS 3 PROCEDIMIENTOS DE ACTUALIZACION DE INFORMACION BATCH:
@@ -1236,3 +1232,85 @@ select * from productos_supermercados ps where ps.nro_supermercado = 4 and ps.pr
 
 JOIN sucursales s on s.nro_sucursal  = ps.nro_sucursal
 
+-- nueva tabla
+create table idiomas_productos 
+(
+	cod_barra varchar(255) not null,
+	cod_idioma varchar(10) not null,
+	nom_producto varchar(50) not null,
+	desc_producto varchar(120) not null,
+
+	constraint PK__idiomas__productos primary key (cod_barra, cod_idioma),
+	constraint FK__idiomas_productos__idiomas foreign key (cod_idioma) references idiomas,
+	constraint FK__idiomas_productos__productos foreign key (cod_barra) references productos
+)
+go
+
+-- nuevo sp para esta tabla que trae los productos los cuales no tienen una descripcion en el idioma seleccionado
+create or alter procedure dbo.obtener_descripciones_productos_idioma
+    @cod_idioma VARCHAR(10)
+AS
+BEGIN
+	SELECT idp.cod_idioma, p.cod_barra, p.nom_producto, p.desc_producto
+	FROM productos p
+	JOIN idiomas_productos idp ON idp.cod_barra = p.cod_barra
+	WHERE idp.cod_idioma != @cod_idioma
+END;
+GO
+
+exec dbo.obtener_descripciones_productos_idioma @cod_idioma = 'ENG'
+
+
+select * from productos p
+where p.cod_barra = '10'
+
+select * from categorias_productos
+where nro_categoria = 2
+
+
+select * from tipos_productos
+
+select * from marcas_productos
+select * from tipos_productos_marcas
+
+
+update productos
+set
+nro_categoria = 3
+
+-- imagen = 'https://static.cotodigital3.com.ar/sitios/fotos/large/00574300/00574317.jpg'
+where cod_barra = '15'
+
+
+
+--
+
+select * from productos_supermercados
+
+
+update productos_supermercados
+set 
+fecha_ult_actualizacion = '2025-07-23 21:20' 
+where cod_barra between 1 and 7 and nro_supermercado = 3
+
+select * from productos_supermercados
+
+update productos_supermercados
+set
+precio = null
+where cod_barra = 10 and nro_supermercado = 4
+
+select * from supermercados where nro_supermercado = 3
+
+select * from localidades where nro_localidad = 4
+
+select * from productos_supermercados sp
+JOIN sucursales s on sp.nro_sucursal = s.nro_sucursal 
+where s.nro_localidad = 4 and sp.nro_supermercado = 2 and sp.cod_barra = 15
+
+order by sp.cod_barra asc
+
+
+-- para casos de borrado
+delete productos_supermercados 
+where cod_barra = 15 and nro_supermercado = 2 and nro_sucursal = 21 or nro_sucursal = 22
