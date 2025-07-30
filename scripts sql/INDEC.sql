@@ -1290,8 +1290,8 @@ select * from productos_supermercados
 
 update productos_supermercados
 set 
-fecha_ult_actualizacion = '2025-07-23 21:20' 
-where cod_barra between 1 and 7 and nro_supermercado = 3
+fecha_ult_actualizacion = '2025-07-29 21:20' 
+where cod_barra between 1 and 15
 
 select * from productos_supermercados
 
