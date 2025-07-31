@@ -10,6 +10,31 @@ public class PrecioMinProductoBean {
     private int sin_precio;
     private int sin_stock;
     private int sin_precio_actual;
+    private int con_promocion;
+    private float mejor_precio_promocion;
+    private String fecha_fin_promocion;
+
+    public void setCon_promocion (int con_promocion){
+        this.con_promocion = con_promocion;
+    }
+    public int getCon_promocion (){
+        return con_promocion;
+    }
+
+    public void setMejor_precio_promocion (float mejor_precio_promocion){
+        this.mejor_precio_promocion = mejor_precio_promocion;
+    }
+    public float getMejor_precio_promocion (){
+        return mejor_precio_promocion;
+    }
+
+    public void setFecha_fin_promocion (String fecha_fin_promocion){
+        this.fecha_fin_promocion = fecha_fin_promocion;
+    }
+
+    public String getFecha_fin_promocion (){
+        return fecha_fin_promocion;
+    }
 
     // private String vigente;
 

@@ -6,12 +6,33 @@ public class PrecioProductoBean {
     private String cod_barra;
     private String vigente;
     private float precio;
+    private float precio_promocion;
+    private String fecha_fin_promocion;
 
     public PrecioProductoBean () {}
 
     // public int getNro_sucursal() {
     //     return nro_sucursal;
     // }
+
+    // nuevos campos
+    public void setPrecioPromocion (float precio_promocion){
+       this.precio_promocion = precio_promocion;
+    }
+
+    public float getPrecio_promocion (){
+        return precio_promocion;
+    }
+
+    public void setFecha_fin_promocion (String fecha_fin_promocion){
+        this.fecha_fin_promocion = fecha_fin_promocion;
+    }
+
+    public String getFecha_fin_promocion (){
+        return fecha_fin_promocion;
+    }
+
+    //
 
     public void setNom_sucursal (String nom_sucursal){
         this.nom_sucursal = nom_sucursal;

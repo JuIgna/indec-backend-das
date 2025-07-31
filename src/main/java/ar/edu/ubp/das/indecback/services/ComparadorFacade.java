@@ -111,11 +111,14 @@ public class ComparadorFacade {
                     break;
                 case "precios":
                     preciosRepository.actualizarPreciosProductos(jsonRespuesta, supermercado.getNro_supermercado());
+                    System.out.println("JSON: " + jsonRespuesta);
                     break;
             }
         }
 
     }
+
+    
 
 
 }
